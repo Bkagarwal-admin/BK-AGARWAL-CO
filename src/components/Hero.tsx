@@ -46,7 +46,7 @@ export default function Hero() {
         }
 
         const reader = response.body.getReader();
-        const chunks: Uint8Array[] = [];
+        const chunks: Uint8Array<ArrayBuffer>[] = [];
 
         while (true) {
           const { done, value } = await reader.read();
