@@ -178,13 +178,13 @@ export default function Hero() {
           <div className="max-w-2xl w-full">
             <motion.div style={{ opacity: heroOpacity, y: heroY }} className="space-y-6">
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-[#8c6d3d] leading-[1.1]">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-slate-900 leading-[1.1]">
                   Simplifying <br className="hidden sm:inline" />
-                  <span className="text-[#b59461] font-light block mt-1">
+                  <span className="text-slate-700 font-light block mt-1">
                     Tax &amp; Compliance for Growing Businesses
                   </span>
                 </h1>
-                <p className="text-sm sm:text-base text-slate-600 font-sans max-w-lg leading-relaxed mix-blend-multiply">
+                <p className="text-sm sm:text-base text-slate-600 font-sans max-w-lg leading-relaxed">
                   From audit to taxation, we help startups, SMEs, and individuals stay compliant and financially confident.
                 </p>
               </div>
