@@ -161,9 +161,9 @@ export default function Hero() {
     // bg-white matches the About section so the empty lower half is invisible.
     <section
       ref={containerRef}
-      className="relative h-[200vh] w-full bg-white"
+      className="relative h-[200dvh] w-full bg-white"
     >
-      {/* Sticky canvas — stays fixed while you scroll through the 200vh section */}
+      {/* Sticky canvas — stays fixed while you scroll through the 200dvh section */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
 
         {/* Background Canvas */}

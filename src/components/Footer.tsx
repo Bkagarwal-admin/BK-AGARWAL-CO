@@ -9,19 +9,21 @@ export default function Footer() {
 
       {/* Main Footer Body */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
 
           {/* Left: Brand */}
           <div className="space-y-1.5">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded bg-slate-900 flex items-center justify-center text-white font-serif font-bold text-xs tracking-wide">
-                CA
-              </div>
+              <img
+                src="https://res.cloudinary.com/deyyfnfxq/image/upload/v1780005295/Screenshot_2026-03-27_at_7.40.54_AM-removebg-preview_uypeq3_okqfsg.png"
+                alt="BK Agarwal & Co logo"
+                className="h-8 w-auto object-contain"
+              />
               <span className="font-sans font-extrabold text-slate-900 tracking-tight text-base">
                 B K AGARWAL &amp; CO
               </span>
             </div>
-            <p className="text-[10px] font-mono tracking-[0.18em] text-[#D4AF37] uppercase pl-9">
+            <p className="text-[10px] font-mono tracking-[0.18em] text-[#D4AF37] uppercase pl-11">
               Chartered Accountants
             </p>
           </div>

@@ -14,7 +14,7 @@ const fadeUp = {
 
 export default function About() {
   return (
-    <section id="about" className="relative z-10 -mt-[100vh] bg-white py-24 sm:py-32 border-b border-slate-100 overflow-hidden">
+    <section id="about" className="relative z-10 -mt-[100dvh] bg-white py-24 sm:py-32 border-b border-slate-100 overflow-hidden">
 
       {/* Subtle decorative gold accent */}
       <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-[#D4AF37]/5 blur-3xl pointer-events-none" />
