@@ -177,11 +177,11 @@ export default function Hero() {
         </div>
 
         {/* Hero Text Overlay */}
-        <div className="relative z-20 flex-grow flex items-end sm:items-center w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 sm:pb-0 select-none">
+        <div className="relative z-20 flex-grow flex items-center w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 sm:pt-0 select-none">
           <div className="max-w-2xl w-full">
             <motion.div style={{ opacity: heroOpacity, y: heroY }} className="space-y-6">
-              <div className="space-y-4">
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+              <div className="space-y-3">
+                <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-slate-900 leading-[1.2]">
                   Know Your Numbers.<br />
                   <span className="font-serif italic font-semibold text-[#D4AF37]">Grow Profit.</span><br />
                   Save Big On Taxes.
