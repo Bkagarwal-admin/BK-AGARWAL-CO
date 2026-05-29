@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 
-const VIDEO_URL = "https://res.cloudinary.com/deyyfnfxq/video/upload/v1779934058/Camera_dolly_into_desk_202605280721_xmxzsp.mp4";
+// Cloudinary URLs — auto-quality compressed, breakpoint-sized
+// q_auto = Cloudinary auto-compresses (≈30-50% smaller), w_N = cap resolution
+const VIDEO_DESKTOP = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,w_1280/v1779934058/Camera_dolly_into_desk_202605280721_xmxzsp.mp4";
+const VIDEO_MOBILE  = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,w_720/v1779934058/Camera_dolly_into_desk_202605280721_xmxzsp.mp4";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,9 +15,6 @@ export default function Hero() {
   const [videoDuration, setVideoDuration] = useState(0);
 
   // ── Scroll tracking scoped to THIS section only ──────────────────────────
-  // scrollYProgress = 0 when hero top hits viewport top
-  // scrollYProgress = 1 when hero bottom hits viewport bottom
-  // This means the video scrubs through its FULL length during the hero scroll.
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -24,62 +24,31 @@ export default function Hero() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.35, 0.55], [1, 0.8, 0]);
   const heroY       = useTransform(scrollYProgress, [0, 0.55], [0, -80]);
 
-  // Video preload logic
+  // ── Native-stream video load (no fetch/blob — first frame in ~300ms) ─────
   useEffect(() => {
-    let active = true;
+    // Pick compressed URL based on viewport width
+    const src = window.innerWidth < 768 ? VIDEO_MOBILE : VIDEO_DESKTOP;
+
     const video = document.createElement("video");
     video.preload     = "auto";
-    video.src         = VIDEO_URL;
+    video.src         = src;
     video.muted       = true;
     video.playsInline = true;
-    video.crossOrigin = "anonymous";
+    // No crossOrigin needed — we only drawImage (no pixel readback)
     videoRef.current  = video;
 
-    const loadVideoFile = async () => {
-      try {
-        const response = await fetch(VIDEO_URL);
-        if (!response.ok) throw new Error("Could not retrieve video resource");
-
-        if (!response.body) {
-          if (active) { video.src = VIDEO_URL; setIsLoaded(true); }
-          return;
-        }
-
-        const reader = response.body.getReader();
-        const chunks: Uint8Array<ArrayBuffer>[] = [];
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          chunks.push(value);
-        }
-
-        if (!active) return;
-
-        const blob = new Blob(chunks, { type: "video/mp4" });
-        video.src = URL.createObjectURL(blob);
-        video.load();
-      } catch {
-        if (active) { video.src = VIDEO_URL; }
-      }
-    };
-
-    const onMetadataLoaded = () => {
-      if (!active) return;
+    const onMeta = () => {
       setVideoDuration(video.duration || 5);
       setIsLoaded(true);
     };
+    const onError = () => console.error("Hero video failed to load");
 
-    const onError = () => { if (!active) return; console.error("Video load failed"); };
-
-    video.addEventListener("loadedmetadata", onMetadataLoaded);
+    video.addEventListener("loadedmetadata", onMeta);
     video.addEventListener("error", onError);
-
-    loadVideoFile();
+    video.load();
 
     return () => {
-      active = false;
-      video.removeEventListener("loadedmetadata", onMetadataLoaded);
+      video.removeEventListener("loadedmetadata", onMeta);
       video.removeEventListener("error", onError);
       video.src = "";
       video.load();
