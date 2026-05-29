@@ -166,39 +166,41 @@ export default function Hero() {
       {/* Sticky canvas — stays fixed while you scroll through the 200dvh section */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
 
-        {/* Background Canvas */}
         <div className="absolute inset-0 z-0">
           <canvas ref={canvasRef} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/40 to-transparent pointer-events-none z-10" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
+          {/* Mobile: soft full-screen wash so text stays readable without killing the video */}
+          <div className="absolute inset-0 bg-white/60 md:hidden pointer-events-none z-10" />
+          {/* Tablet+: directional gradient — left side white for text, right side transparent for video */}
+          <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/95 via-white/40 to-transparent pointer-events-none z-10" />
+          {/* Bottom fade — both breakpoints */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
         </div>
 
         {/* Hero Text Overlay */}
-        <div className="relative z-20 flex-grow flex items-center w-full max-w-7xl mx-auto px-6 md:px-12 select-none">
+        <div className="relative z-20 flex-grow flex items-end sm:items-center w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 sm:pb-0 select-none">
           <div className="max-w-2xl w-full">
             <motion.div style={{ opacity: heroOpacity, y: heroY }} className="space-y-6">
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-                  Simplifying <br className="hidden sm:inline" />
-                  <span className="text-slate-700 font-light block mt-1">
-                    Tax &amp; Compliance for Growing Businesses
-                  </span>
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+                  Know Your Numbers.<br />
+                  <span className="font-serif italic font-semibold text-[#D4AF37]">Grow Profit.</span><br />
+                  Save Big On Taxes.
                 </h1>
                 <p className="text-sm sm:text-base text-slate-600 font-sans max-w-lg leading-relaxed">
                   From audit to taxation, we help startups, SMEs, and individuals stay compliant and financially confident.
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-4 items-center pt-2">
+              <div className="flex flex-wrap gap-3 sm:gap-4 items-center pt-2">
                 <button
                   onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                  className="px-5 py-3 rounded bg-slate-950 text-white font-sans text-xs font-semibold tracking-wider hover:bg-slate-800 transition-all cursor-pointer shadow-md hover:shadow-lg"
+                  className="px-4 sm:px-5 py-2.5 sm:py-3 rounded bg-slate-950 text-white font-sans text-xs font-semibold tracking-wider hover:bg-slate-800 transition-all cursor-pointer shadow-md hover:shadow-lg"
                 >
                   BOOK A CONSULTATION
                 </button>
                 <button
                   onClick={() => window.scrollTo({ top: window.innerHeight * 0.9, behavior: "smooth" })}
-                  className="px-5 py-3 rounded bg-white hover:bg-slate-100 text-slate-900 border border-slate-200 font-sans text-xs font-semibold tracking-wider transition-all cursor-pointer shadow-sm"
+                  className="px-4 sm:px-5 py-2.5 sm:py-3 rounded bg-white hover:bg-slate-100 text-slate-900 border border-slate-200 font-sans text-xs font-semibold tracking-wider transition-all cursor-pointer shadow-sm"
                 >
                   VIEW SERVICES
                 </button>
