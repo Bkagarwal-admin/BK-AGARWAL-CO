@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 
-// Cloudinary URLs — auto-quality compressed, breakpoint-sized
-// q_auto = Cloudinary auto-compresses (≈30-50% smaller), w_N = cap resolution
-const VIDEO_DESKTOP = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,w_1280/v1779934058/Camera_dolly_into_desk_202605280721_xmxzsp.mp4";
-const VIDEO_MOBILE  = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,w_720/v1779934058/Camera_dolly_into_desk_202605280721_xmxzsp.mp4";
+const VIDEO_DESKTOP = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,w_1280/v1780224260/download_ng7dki.mp4";
+const VIDEO_MOBILE  = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto:low,w_480/v1780224260/download_ng7dki.mp4";
+// First frame of the video served as JPEG — loads in ~100ms and acts as placeholder
+const POSTER        = "https://res.cloudinary.com/deyyfnfxq/video/upload/so_0.0,q_auto,w_1280/v1780224260/download_ng7dki.jpg";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,7 +24,10 @@ export default function Hero() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.35, 0.55], [1, 0.8, 0]);
   const heroY       = useTransform(scrollYProgress, [0, 0.55], [0, -80]);
 
-  // ── Native-stream video load (no fetch/blob — first frame in ~300ms) ─────
+  // Canvas zooms in as you scroll down, zooms out as you scroll back up
+  const videoScale  = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+
+  // ── Native-stream video load (no fetch/blob - first frame in ~300ms) ─────
   useEffect(() => {
     // Pick compressed URL based on viewport width
     const src = window.innerWidth < 768 ? VIDEO_MOBILE : VIDEO_DESKTOP;
@@ -34,7 +37,7 @@ export default function Hero() {
     video.src         = src;
     video.muted       = true;
     video.playsInline = true;
-    // No crossOrigin needed — we only drawImage (no pixel readback)
+    // No crossOrigin needed - we only drawImage (no pixel readback)
     videoRef.current  = video;
 
     const onMeta = () => {
@@ -132,18 +135,25 @@ export default function Hero() {
       ref={containerRef}
       className="relative h-[200dvh] w-full bg-white"
     >
-      {/* Sticky canvas — stays fixed while you scroll through the 200dvh section */}
+      {/* Sticky canvas - stays fixed while you scroll through the 200dvh section */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
 
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{
+            scale: videoScale,
+            transformOrigin: "center center",
+            backgroundImage: `url(${POSTER})`,
+          }}
+        >
           <canvas ref={canvasRef} className="w-full h-full object-cover" />
           {/* Mobile: soft full-screen wash so text stays readable without killing the video */}
           <div className="absolute inset-0 bg-white/60 md:hidden pointer-events-none z-10" />
-          {/* Tablet+: directional gradient — left side white for text, right side transparent for video */}
+          {/* Tablet+: directional gradient - left side white for text, right side transparent for video */}
           <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/95 via-white/40 to-transparent pointer-events-none z-10" />
-          {/* Bottom fade — both breakpoints */}
+          {/* Bottom fade - both breakpoints */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
-        </div>
+        </motion.div>
 
         {/* Hero Text Overlay */}
         <div className="relative z-20 flex-grow flex items-center w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 sm:pt-0 select-none">

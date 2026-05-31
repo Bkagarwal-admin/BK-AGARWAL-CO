@@ -4,18 +4,39 @@ import { motion, AnimatePresence } from "motion/react";
 import { SERVICES } from "../data/services";
 
 const NAV_LINKS = [
-  { label: "Home",         href: "#"             },
-  { label: "About Us",     href: "#about"        },
-  { label: "Why Us",       href: "#why-us"       },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact Us",   href: "#contact"      },
+  { label: "Home",         id: null            },
+  { label: "About Us",     id: "about"         },
+  { label: "Why Us",       id: "why-us"        },
+  { label: "Testimonials", id: "testimonials"  },
+  { label: "Contact Us",   id: "contact"       },
 ] as const;
+
+const NAV_OFFSET = 80; // navbar height (73px) + breathing room
+
+function getAbsoluteTop(el: HTMLElement) {
+  let top = 0;
+  let node: HTMLElement | null = el;
+  while (node) {
+    top += node.offsetTop;
+    node = node.offsetParent as HTMLElement | null;
+  }
+  return top;
+}
+
+function scrollTo(id: string | null) {
+  if (id === null) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: getAbsoluteTop(el) - NAV_OFFSET, behavior: "smooth" });
+  }
+}
 
 function selectService(index: number) {
   window.dispatchEvent(new CustomEvent("selectService", { detail: { index } }));
-  // Give the event a tick to register before scrolling
   setTimeout(() => {
-    document.getElementById("services")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById("services");
+    if (el) window.scrollTo({ top: getAbsoluteTop(el) - NAV_OFFSET, behavior: "smooth" });
   }, 50);
 }
 
@@ -55,7 +76,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-6 py-4 md:px-12">
 
           {/* Brand */}
-          <a href="#" className="flex items-center gap-3 group select-none">
+          <a href="/" onClick={(e) => { e.preventDefault(); scrollTo(null); }} className="flex items-center gap-3 group select-none">
             <img
               src="https://res.cloudinary.com/deyyfnfxq/image/upload/v1780005295/Screenshot_2026-03-27_at_7.40.54_AM-removebg-preview_uypeq3_okqfsg.png"
               alt="BK Agarwal & Co logo"
@@ -80,13 +101,13 @@ export default function Navbar() {
 
             {/* Home */}
             <li>
-              <a href="#" className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group">
+              <a href="/" onClick={(e) => { e.preventDefault(); scrollTo(null); }} className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group">
                 Home
                 <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
 
-            {/* Services — with dropdown */}
+            {/* Services - with dropdown */}
             <li
               ref={dropdownRef}
               className="relative"
@@ -94,7 +115,7 @@ export default function Navbar() {
               onMouseLeave={() => setServicesOpen(false)}
             >
               <button
-                onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => scrollTo("services")}
                 className="relative flex items-center gap-1 text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group cursor-pointer"
               >
                 Services
@@ -144,10 +165,11 @@ export default function Navbar() {
             </li>
 
             {/* Other links */}
-            {NAV_LINKS.filter(l => l.label !== "Home").map(({ label, href }) => (
+            {NAV_LINKS.filter(l => l.label !== "Home").map(({ label, id }) => (
               <li key={label}>
                 <a
-                  href={href}
+                  href={`/${id ? `#${id}` : ""}`}
+                  onClick={(e) => { e.preventDefault(); scrollTo(id); }}
                   className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
                 >
                   {label}
@@ -180,7 +202,7 @@ export default function Navbar() {
         >
           <ul className="flex flex-col px-6 py-4 gap-1">
             <li>
-              <a href="#" onClick={() => setMenuOpen(false)}
+              <a href="/" onClick={(e) => { e.preventDefault(); scrollTo(null); setMenuOpen(false); }}
                 className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2">
                 Home
               </a>
@@ -219,9 +241,9 @@ export default function Navbar() {
               </AnimatePresence>
             </li>
 
-            {NAV_LINKS.filter(l => l.label !== "Home").map(({ label, href }) => (
+            {NAV_LINKS.filter(l => l.label !== "Home").map(({ label, id }) => (
               <li key={label}>
-                <a href={href} onClick={() => setMenuOpen(false)}
+                <a href={`/${id ? `#${id}` : ""}`} onClick={(e) => { e.preventDefault(); scrollTo(id); setMenuOpen(false); }}
                   className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2">
                   {label}
                 </a>

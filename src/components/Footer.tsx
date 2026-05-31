@@ -40,7 +40,7 @@ export default function Footer() {
           </div>
 
           {/* Right: Links */}
-          <div className="flex items-center gap-6">
+          {/* <div className="flex items-center gap-6">
             {FOOTER_LINKS.map(({ label, href }) => (
               <a
                 key={label}
@@ -50,7 +50,7 @@ export default function Footer() {
                 {label}
               </a>
             ))}
-          </div>
+          </div> */}
 
         </div>
       </div>

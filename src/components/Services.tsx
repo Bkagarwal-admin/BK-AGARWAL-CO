@@ -36,7 +36,7 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="bg-[#FAFAFA] py-24 sm:py-32 border-b border-slate-100"
+      className="relative z-20 bg-[#FAFAFA] pt-20 sm:pt-24 pb-24 sm:pb-32 border-b border-slate-100"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 

@@ -14,7 +14,7 @@ const fadeUp = {
 
 export default function About() {
   return (
-    <section id="about" className="relative z-10 -mt-[100dvh] bg-white py-24 sm:py-32 border-b border-slate-100 overflow-hidden">
+    <section id="about" className="relative z-10 -mt-[100dvh] bg-white pt-24 sm:pt-32 pb-6 sm:pb-8 border-b border-slate-100 overflow-hidden">
 
       {/* Subtle decorative gold accent */}
       <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-[#D4AF37]/5 blur-3xl pointer-events-none" />
@@ -92,7 +92,7 @@ export default function About() {
 
             <p className="text-base text-slate-600 font-sans leading-relaxed">
               Our distinguished client portfolio encompasses publicly listed companies, prominent multinational corporations,
-              and high-potential start-ups — reflecting the breadth of our capabilities and the confidence our clients place in us.
+              and high-potential start-ups - reflecting the breadth of our capabilities and the confidence our clients place in us.
             </p>
 
             <p className="text-base text-slate-600 font-sans leading-relaxed">

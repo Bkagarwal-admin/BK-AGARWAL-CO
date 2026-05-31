@@ -185,7 +185,7 @@ export default function Contact() {
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
                 <h3 className="font-sans font-bold text-slate-900 text-base uppercase tracking-widest text-[11px] font-mono">
-                  Head Office — Bangalore
+                  Head Office - Bangalore
                 </h3>
               </div>
 

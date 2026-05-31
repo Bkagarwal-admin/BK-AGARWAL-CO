@@ -15,12 +15,12 @@ const WHY_CARDS = [
   {
     icon:  Globe2,
     title: "Expertise Across Diverse Industries",
-    body:  "We serve clients across Infrastructure, Manufacturing, Construction, Information Technology, and more—including listed companies, large MNCs, and high-growth start-ups. Our cross-sector exposure ensures practical, informed advice.",
+    body:  "We serve clients across Infrastructure, Manufacturing, Construction, Information Technology, and more-including listed companies, large MNCs, and high-growth start-ups. Our cross-sector exposure ensures practical, informed advice.",
   },
   {
     icon:  Cpu,
     title: "Technology-Driven Practice",
-    body:  "We leverage modern accounting platforms and digital tools to deliver faster, more accurate, and transparent services—combining traditional professional values with new-age efficiency.",
+    body:  "We leverage modern accounting platforms and digital tools to deliver faster, more accurate, and transparent services-combining traditional professional values with new-age efficiency.",
   },
 ];
 
