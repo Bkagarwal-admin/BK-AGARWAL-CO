@@ -82,6 +82,7 @@ export default function Testimonials() {
         >
           <span className="block w-8 h-px bg-[#D4AF37]" />
           <span className="text-[11px] font-mono tracking-widest text-[#D4AF37] uppercase">Client Stories</span>
+          <h2 className="sr-only">What Our Clients Say About B K Agarwal &amp; Co</h2>
         </motion.div>
 
         {/* Slideshow Container */}
