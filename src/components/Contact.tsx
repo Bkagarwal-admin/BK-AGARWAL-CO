@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { useTilt } from "../hooks/useTilt";
 
 const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  as string;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
@@ -33,6 +34,88 @@ const fadeUp = {
     transition: { duration: 0.55, delay: i * 0.1, ease: "easeOut" as const },
   }),
 };
+
+function BranchCard({ city, address, mapsUrl, index }: { city: string; address: string; mapsUrl?: string; index: number }) {
+  const { ref, onMouseMove, onMouseLeave } = useTilt(8, 1.02);
+  return (
+    <motion.div
+      ref={ref}
+      custom={index}
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="p-5 rounded-lg bg-white border border-slate-100 hover:border-[#D4AF37]/30 transition-all duration-200 ease-out will-change-transform space-y-2"
+    >
+      <div className="flex items-center gap-2">
+        <MapPin className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+        <h4 className="font-sans font-bold text-slate-900 text-sm">{city}</h4>
+      </div>
+      {mapsUrl ? (
+        <a href={mapsUrl} target="_blank" rel="noopener noreferrer"
+          className="text-xs text-slate-500 font-sans leading-relaxed hover:text-[#D4AF37] transition-colors block">
+          {address}
+        </a>
+      ) : (
+        <p className="text-xs text-slate-500 font-sans leading-relaxed">{address}</p>
+      )}
+    </motion.div>
+  );
+}
+
+function HeadOfficeCard() {
+  const { ref, onMouseMove, onMouseLeave } = useTilt();
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="p-8 rounded-xl bg-white border border-slate-100 shadow-sm space-y-6 transition-transform duration-200 ease-out will-change-transform"
+    >
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+        <h3 className="font-sans font-bold text-slate-900 uppercase tracking-widest text-[11px] font-mono">
+          Head Office - Bangalore
+        </h3>
+      </div>
+
+      <div className="space-y-4">
+        <div className="flex items-start gap-3 text-sm text-slate-600 font-sans">
+          <MapPin className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
+          <span className="leading-relaxed">
+            No.18, S-1, 1st Floor, Near Banappa Park, 11th Cross, Cubbonpet, Bangalore, Karnataka 560002
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
+          <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
+          <a href="mailto:mail@bkagarwal.in" className="hover:text-[#D4AF37] transition-colors">
+            mail@bkagarwal.in
+          </a>
+        </div>
+
+        <div className="flex items-start gap-3 text-sm text-slate-600 font-sans">
+          <Phone className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
+          <div className="space-y-1">
+            {["+91-9341551773", "+91-9535500655", "080-42156808", "080-42156806"].map((num) => (
+              <a key={num} href={`tel:${num.replace(/-/g, "")}`} className="block hover:text-[#D4AF37] transition-colors">
+                {num}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
+          <Clock className="w-4 h-4 text-[#D4AF37] shrink-0" />
+          <span>Mon – Sat : 10:00 AM – 07:00 PM</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Contact() {
   const [form, setForm]       = useState({ name: "", mobile: "", email: "", message: "" });
@@ -215,47 +298,8 @@ export default function Contact() {
             className="space-y-8"
           >
 
-            {/* Head Office Card */}
-            <div className="p-8 rounded-xl bg-white border border-slate-100 shadow-sm space-y-6">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-                <h3 className="font-sans font-bold text-slate-900 text-base uppercase tracking-widest text-[11px] font-mono">
-                  Head Office - Bangalore
-                </h3>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-3 text-sm text-slate-600 font-sans">
-                  <MapPin className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
-                  <span className="leading-relaxed">
-                    No.18, S-1, 1st Floor, Near Banappa Park, 11th Cross, Cubbonpet, Bangalore, Karnataka 560002
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
-                  <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                  <a href="mailto:mail@bkagarwal.in" className="hover:text-[#D4AF37] transition-colors">
-                    mail@bkagarwal.in
-                  </a>
-                </div>
-
-                <div className="flex items-start gap-3 text-sm text-slate-600 font-sans">
-                  <Phone className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
-                  <div className="space-y-1">
-                    {["+91-9341551773", "+91-9535500655", "080-42156808", "080-42156806"].map((num) => (
-                      <a key={num} href={`tel:${num.replace(/-/g, "")}`} className="block hover:text-[#D4AF37] transition-colors">
-                        {num}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
-                  <Clock className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                  <span>Mon – Sat : 10:00 AM – 07:00 PM</span>
-                </div>
-              </div>
-            </div>
+            {/* Head Office Card — 3D tilt on hover */}
+            <HeadOfficeCard />
 
             {/* Branch Offices Sub-Grid */}
             <div>
@@ -265,32 +309,7 @@ export default function Contact() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {BRANCHES.map(({ city, address, mapsUrl }, i) => (
-                  <motion.div
-                    key={city}
-                    custom={i}
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="p-5 rounded-lg bg-white border border-slate-100 hover:border-[#D4AF37]/30 hover:shadow-sm transition-all duration-300 space-y-2"
-                  >
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
-                      <h4 className="font-sans font-bold text-slate-900 text-sm">{city}</h4>
-                    </div>
-                    {mapsUrl ? (
-                      <a
-                        href={mapsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-slate-500 font-sans leading-relaxed hover:text-[#D4AF37] transition-colors block"
-                      >
-                        {address}
-                      </a>
-                    ) : (
-                      <p className="text-xs text-slate-500 font-sans leading-relaxed">{address}</p>
-                    )}
-                  </motion.div>
+                  <BranchCard key={city} city={city} address={address} mapsUrl={mapsUrl} index={i} />
                 ))}
               </div>
             </div>

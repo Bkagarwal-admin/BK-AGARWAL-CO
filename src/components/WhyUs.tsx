@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { ShieldCheck, Layers, Globe2, Cpu } from "lucide-react";
+import { ShieldCheck, Layers, Globe2, Cpu, LucideIcon } from "lucide-react";
+import { useTilt } from "../hooks/useTilt";
 
 const WHY_CARDS = [
   {
@@ -33,12 +34,43 @@ const cardVariant = {
   }),
 };
 
+function WhyCard({ icon: Icon, title, body, index }: { icon: LucideIcon; title: string; body: string; index: number }) {
+  const { ref, onMouseMove, onMouseLeave } = useTilt(8, 1.02);
+  return (
+    <motion.div
+      ref={ref}
+      custom={index}
+      variants={cardVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="group relative flex flex-col gap-5 p-7 rounded-xl bg-white border border-slate-100 shadow-sm transition-all duration-200 ease-out will-change-transform"
+    >
+      <div className="w-11 h-11 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37]/20 transition-colors duration-300">
+        <Icon className="w-5 h-5 text-[#D4AF37]" />
+      </div>
+
+      <span className="absolute top-5 right-5 text-[11px] font-mono text-slate-200 font-bold select-none">
+        0{index + 1}
+      </span>
+
+      <div className="space-y-3">
+        <h3 className="text-base font-sans font-bold text-slate-900 leading-snug">{title}</h3>
+        <p className="text-sm text-slate-500 font-sans leading-relaxed">{body}</p>
+      </div>
+
+      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] rounded-full group-hover:w-full transition-all duration-500" />
+    </motion.div>
+  );
+}
+
 export default function WhyUs() {
   return (
     <section id="why-us" className="bg-[#FAFAFA] py-24 sm:py-32 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,37 +91,9 @@ export default function WhyUs() {
           </p>
         </motion.div>
 
-        {/* 4-Column Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {WHY_CARDS.map(({ icon: Icon, title, body }, i) => (
-            <motion.div
-              key={title}
-              custom={i}
-              variants={cardVariant}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="group relative flex flex-col gap-5 p-7 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300"
-            >
-              {/* Gold Icon Marker */}
-              <div className="w-11 h-11 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37]/20 transition-colors duration-300">
-                <Icon className="w-5 h-5 text-[#D4AF37]" />
-              </div>
-
-              {/* Card Number */}
-              <span className="absolute top-5 right-5 text-[11px] font-mono text-slate-200 font-bold select-none">
-                0{i + 1}
-              </span>
-
-              {/* Content */}
-              <div className="space-y-3">
-                <h3 className="text-base font-sans font-bold text-slate-900 leading-snug">{title}</h3>
-                <p className="text-sm text-slate-500 font-sans leading-relaxed">{body}</p>
-              </div>
-
-              {/* Subtle gold bottom accent on hover */}
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] rounded-full group-hover:w-full transition-all duration-500" />
-            </motion.div>
+          {WHY_CARDS.map(({ icon, title, body }, i) => (
+            <WhyCard key={title} icon={icon} title={title} body={body} index={i} />
           ))}
         </div>
 

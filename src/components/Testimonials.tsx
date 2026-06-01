@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTilt } from "../hooks/useTilt";
 
 // ── Add more testimonials here ──────────────────────────────────────────────
 const TESTIMONIALS = [
@@ -61,6 +62,7 @@ export default function Testimonials() {
   }, [index]);
 
   const current = TESTIMONIALS[index];
+  const { ref: cardRef, onMouseMove, onMouseLeave } = useTilt(6, 1.01);
 
   const variants = {
     enter:  (d: number) => ({ opacity: 0, x: d * 48 }),
@@ -102,7 +104,12 @@ export default function Testimonials() {
           </div>
 
           {/* Slide Card */}
-          <div className="relative z-10 bg-[#FAFAFA] border border-slate-100 rounded-2xl px-10 pt-16 pb-10 md:px-16 md:pt-20 md:pb-12 shadow-sm overflow-hidden min-h-[320px]">
+          <div
+            ref={cardRef}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
+            className="relative z-10 bg-[#FAFAFA] border border-slate-100 rounded-2xl px-10 pt-16 pb-10 md:px-16 md:pt-20 md:pb-12 shadow-sm overflow-hidden min-h-[320px] transition-transform duration-200 ease-out will-change-transform"
+          >
             <AnimatePresence mode="wait" custom={direction}>
               <motion.figure
                 key={index}
