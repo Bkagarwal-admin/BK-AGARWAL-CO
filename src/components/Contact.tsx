@@ -1,19 +1,27 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID  = "service_s00oysm";
+const EMAILJS_TEMPLATE_ID = "template_dl8xivl";
+const EMAILJS_PUBLIC_KEY  = "mZlcBJhkBOvrI5Jf_";
 
 const BRANCHES = [
   {
     city:    "Chennai",
     address: "Plot No 137, 6th Cross Street, 2nd Avenue, Vettuvankeni, Chennai - 600115",
+    mapsUrl: "https://maps.app.goo.gl/Txmnwy2w2GLoizdj9",
   },
   {
     city:    "Mumbai",
     address: "1214 Crystal 86 A, Andheri Ghatkopar Link Rd, Lal Bahadur Shastri Marg, near Shreyas Signal, Gangawadi, Ghatkopar West, Mumbai, Maharashtra 400086",
+    mapsUrl: "https://maps.app.goo.gl/nXnq8HvH1vjAWf9L9",
   },
   {
     city:    "Sonepat",
     address: "#26, Omaxe Galleria, Omaxe City, Sonepat - 131001",
+    mapsUrl: "https://maps.app.goo.gl/h7BfMv2cKWKFvogx9",
   },
 ];
 
@@ -27,15 +35,37 @@ const fadeUp = {
 };
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", mobile: "", email: "", message: "" });
-  const [sent, setSent]  = useState(false);
+  const [form, setForm]       = useState({ name: "", mobile: "", email: "", message: "" });
+  const [sent, setSent]       = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setError("");
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:    form.name,
+          from_mobile:  form.mobile,
+          from_email:   form.email,
+          message:      form.message,
+          to_email:     "admin.bkagarwal@gmail.com",
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setSent(true);
+    } catch {
+      setError("Something went wrong. Please try again or contact us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -160,12 +190,17 @@ export default function Contact() {
                   />
                 </div>
 
+                {error && (
+                  <p className="text-xs text-red-500 font-sans">{error}</p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-lg bg-[#D4AF37] hover:bg-[#b8962e] text-white font-sans font-bold text-sm tracking-wide transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                  disabled={loading}
+                  className="w-full py-3.5 rounded-lg bg-[#D4AF37] hover:bg-[#b8962e] disabled:opacity-60 disabled:cursor-not-allowed text-white font-sans font-bold text-sm tracking-wide transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
-                  Send Message
+                  {loading ? "Sending…" : "Send Message"}
                 </button>
               </form>
             )}
@@ -207,7 +242,7 @@ export default function Contact() {
                 <div className="flex items-start gap-3 text-sm text-slate-600 font-sans">
                   <Phone className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
                   <div className="space-y-1">
-                    {["+91-9341551773", "+91-9916474589", "+91-9535500655"].map((num) => (
+                    {["+91-9341551773", "+91-9535500655", "080-42156808", "080-42156806"].map((num) => (
                       <a key={num} href={`tel:${num.replace(/-/g, "")}`} className="block hover:text-[#D4AF37] transition-colors">
                         {num}
                       </a>
@@ -229,7 +264,7 @@ export default function Contact() {
                 <span className="text-[11px] font-mono tracking-widest text-slate-400 uppercase">Branch Offices</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {BRANCHES.map(({ city, address }, i) => (
+                {BRANCHES.map(({ city, address, mapsUrl }, i) => (
                   <motion.div
                     key={city}
                     custom={i}
@@ -243,7 +278,18 @@ export default function Contact() {
                       <MapPin className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
                       <h4 className="font-sans font-bold text-slate-900 text-sm">{city}</h4>
                     </div>
-                    <p className="text-xs text-slate-500 font-sans leading-relaxed">{address}</p>
+                    {mapsUrl ? (
+                      <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-slate-500 font-sans leading-relaxed hover:text-[#D4AF37] transition-colors block"
+                      >
+                        {address}
+                      </a>
+                    ) : (
+                      <p className="text-xs text-slate-500 font-sans leading-relaxed">{address}</p>
+                    )}
                   </motion.div>
                 ))}
               </div>

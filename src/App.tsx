@@ -6,6 +6,7 @@ import WhyUs from "./components/WhyUs";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import WhatsappCTA from "./components/WhatsappCTA";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <Testimonials />
       <Contact />
       <Footer />
+      <WhatsappCTA />
     </div>
   );
 }

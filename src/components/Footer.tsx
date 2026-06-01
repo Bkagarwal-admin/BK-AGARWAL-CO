@@ -28,16 +28,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Center: ICAI Compliance Tag */}
-          <div className="text-center">
-            <p className="text-xs font-mono text-slate-500">
-              Firm Registration Number (FRN):{" "}
-              <span className="text-slate-700 font-semibold">[Insert FRN Here]</span>
-            </p>
-            <p className="text-[10px] font-mono text-slate-400 mt-0.5 tracking-wider">
-              Institute of Chartered Accountants of India
-            </p>
-          </div>
 
           {/* Right: Links */}
           {/* <div className="flex items-center gap-6">

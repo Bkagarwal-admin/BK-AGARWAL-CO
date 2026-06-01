@@ -80,14 +80,14 @@ export default function Navbar() {
             <img
               src="https://res.cloudinary.com/deyyfnfxq/image/upload/v1780005295/Screenshot_2026-03-27_at_7.40.54_AM-removebg-preview_uypeq3_okqfsg.png"
               alt="BK Agarwal & Co logo"
-              className="h-10 w-auto object-contain select-none"
+              className="h-13 w-auto object-contain select-none"
             />
             <div className="leading-none">
-              <span className="block font-sans font-extrabold tracking-tight text-base text-slate-900 transition-colors duration-500">
+              <span className="block font-sans font-extrabold tracking-tight text-lg text-slate-900 transition-colors duration-500">
                 B K AGARWAL &amp; CO
               </span>
               <span
-                className={`block text-[9px] font-mono tracking-[0.18em] uppercase mt-0.5 transition-colors duration-500 ${
+                className={`block text-[10px] font-mono tracking-[0.18em] uppercase mt-0.5 transition-colors duration-500 ${
                   scrolled ? "text-[#b8962e]" : "text-[#D4AF37]/80"
                 }`}
               >

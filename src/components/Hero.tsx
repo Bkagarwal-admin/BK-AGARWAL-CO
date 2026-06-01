@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 
-const VIDEO_DESKTOP = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,w_1280/v1780224260/download_ng7dki.mp4";
-const VIDEO_MOBILE  = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto:low,w_480/v1780224260/download_ng7dki.mp4";
+const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
+
+const VIDEO_DESKTOP = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,vc_auto,w_1280/v1780309002/download_1_imksli.mp4";
+const VIDEO_MOBILE  = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto:low,vc_auto,w_480/v1780309002/download_1_imksli.mp4";
 // First frame of the video served as JPEG — loads in ~100ms and acts as placeholder
-const POSTER        = "https://res.cloudinary.com/deyyfnfxq/video/upload/so_0.0,q_auto,w_1280/v1780224260/download_ng7dki.jpg";
+const POSTER        = "https://res.cloudinary.com/deyyfnfxq/video/upload/so_0.0,q_auto,w_1280/v1780309002/download_1_imksli.jpg";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,6 +15,9 @@ export default function Hero() {
 
   const [isLoaded,      setIsLoaded]      = useState(false);
   const [videoDuration, setVideoDuration] = useState(0);
+  const [mobile,        setMobile]        = useState(false);
+
+  useEffect(() => { setMobile(isMobile()); }, []);
 
   // ── Scroll tracking scoped to THIS section only ──────────────────────────
   const { scrollYProgress } = useScroll({
@@ -29,8 +34,8 @@ export default function Hero() {
 
   // ── Native-stream video load (no fetch/blob - first frame in ~300ms) ─────
   useEffect(() => {
-    // Pick compressed URL based on viewport width
-    const src = window.innerWidth < 768 ? VIDEO_MOBILE : VIDEO_DESKTOP;
+    if (mobile) return; // mobile uses a plain <video> tag instead
+    const src = VIDEO_DESKTOP;
 
     const video = document.createElement("video");
     video.preload     = "auto";
@@ -56,11 +61,11 @@ export default function Hero() {
       video.src = "";
       video.load();
     };
-  }, []);
+  }, [mobile]);
 
   // Frame painting and interpolation loop
   useEffect(() => {
-    if (!isLoaded || !videoRef.current || !canvasRef.current) return;
+    if (mobile || !isLoaded || !videoRef.current || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const video  = videoRef.current;
@@ -146,7 +151,21 @@ export default function Hero() {
             backgroundImage: `url(${POSTER})`,
           }}
         >
-          <canvas ref={canvasRef} className="w-full h-full object-cover" />
+          {mobile ? (
+            /* Mobile: plain autoplay video — no canvas overhead, loads instantly */
+            <video
+              src={VIDEO_MOBILE}
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster={POSTER}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            /* Desktop: canvas scroll-scrub */
+            <canvas ref={canvasRef} className="w-full h-full object-cover" />
+          )}
           {/* Mobile: soft full-screen wash so text stays readable without killing the video */}
           <div className="absolute inset-0 bg-white/60 md:hidden pointer-events-none z-10" />
           {/* Tablet+: directional gradient - left side white for text, right side transparent for video */}

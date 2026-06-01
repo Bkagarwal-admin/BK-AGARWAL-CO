@@ -2,9 +2,9 @@ import { motion } from "motion/react";
 import { Award, Globe, Users } from "lucide-react";
 
 const STATS = [
-  { icon: Award,  value: "20+",  label: "Years of Excellence"       },
-  { icon: Globe,  value: "4",    label: "Industry Verticals Served" },
-  { icon: Users,  value: "200+", label: "Clients Across India"      },
+  { icon: Award,  value: "Decades",  label: "of Excellence"       },
+  { icon: Globe,  value: "4",        label: "Industry Verticals Served" },
+  { icon: Users,  value: "1000+",    label: "Clients Across India"      },
 ];
 
 const fadeUp = {
