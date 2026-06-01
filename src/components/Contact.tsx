@@ -85,9 +85,14 @@ function HeadOfficeCard() {
       <div className="space-y-4">
         <div className="flex items-start gap-3 text-sm text-slate-600 font-sans">
           <MapPin className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
-          <span className="leading-relaxed">
+          <a
+            href="https://maps.app.goo.gl/eQ1XMCoCo4m3Pngk8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="leading-relaxed hover:text-[#D4AF37] transition-colors"
+          >
             No.18, S-1, 1st Floor, Near Banappa Park, 11th Cross, Cubbonpet, Bangalore, Karnataka 560002
-          </span>
+          </a>
         </div>
 
         <div className="flex items-center gap-3 text-sm text-slate-600 font-sans">
