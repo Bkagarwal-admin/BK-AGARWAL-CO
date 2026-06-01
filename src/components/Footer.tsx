@@ -1,8 +1,3 @@
-const FOOTER_LINKS = [
-  { label: "Privacy Policy",    href: "#" },
-  { label: "Terms of Service",  href: "#" },
-];
-
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-slate-100">
@@ -11,7 +6,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
 
-          {/* Left: Brand */}
+          {/* Brand */}
           <div className="space-y-1.5">
             <div className="flex items-center gap-2.5">
               <img
@@ -27,20 +22,6 @@ export default function Footer() {
               Chartered Accountants
             </p>
           </div>
-
-
-          {/* Right: Links */}
-          {/* <div className="flex items-center gap-6">
-            {FOOTER_LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="text-xs font-sans text-slate-500 hover:text-slate-900 transition-colors"
-              >
-                {label}
-              </a>
-            ))}
-          </div> */}
 
         </div>
       </div>

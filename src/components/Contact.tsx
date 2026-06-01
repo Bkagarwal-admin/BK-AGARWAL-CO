@@ -3,9 +3,9 @@ import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
-const EMAILJS_SERVICE_ID  = "service_s00oysm";
-const EMAILJS_TEMPLATE_ID = "template_dl8xivl";
-const EMAILJS_PUBLIC_KEY  = "mZlcBJhkBOvrI5Jf_";
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  as string;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  as string;
 
 const BRANCHES = [
   {
@@ -56,7 +56,7 @@ export default function Contact() {
           from_mobile:  form.mobile,
           from_email:   form.email,
           message:      form.message,
-          to_email:     "admin.bkagarwal@gmail.com",
+          to_email:     import.meta.env.VITE_ADMIN_EMAIL as string,
         },
         EMAILJS_PUBLIC_KEY
       );

@@ -1,6 +1,0 @@
-{
-  "name": "Tax & Compliance App",
-  "description": "A premium, Apple-style sticky scroll hero interface for a Chartered Accountant firm, displaying a transitions of clutter-to-clean desk on scroll.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
