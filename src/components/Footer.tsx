@@ -4,7 +4,7 @@ export default function Footer() {
 
       {/* Main Footer Body */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div className="flex justify-center">
 
           {/* Brand */}
           <div className="space-y-1.5">
