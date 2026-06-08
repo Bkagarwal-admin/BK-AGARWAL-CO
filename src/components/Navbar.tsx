@@ -107,6 +107,18 @@ export default function Navbar() {
               </a>
             </li>
 
+            {/* About Us */}
+            <li>
+              <a
+                href="/#about"
+                onClick={(e) => { e.preventDefault(); scrollTo("about"); }}
+                className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
+              >
+                About Us
+                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
+              </a>
+            </li>
+
             {/* Services - with dropdown */}
             <li
               ref={dropdownRef}
@@ -165,7 +177,7 @@ export default function Navbar() {
             </li>
 
             {/* Other links */}
-            {NAV_LINKS.filter(l => l.label !== "Home").map(({ label, id }) => (
+            {NAV_LINKS.filter(l => l.label !== "Home" && l.label !== "About Us").map(({ label, id }) => (
               <li key={label}>
                 <a
                   href={`/${id ? `#${id}` : ""}`}
@@ -208,6 +220,14 @@ export default function Navbar() {
               </a>
             </li>
 
+            {/* About Us */}
+            <li>
+              <a href="/#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); setMenuOpen(false); }}
+                className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2">
+                About Us
+              </a>
+            </li>
+
             {/* Services with expandable sub-list on mobile */}
             <li>
               <button
@@ -241,7 +261,7 @@ export default function Navbar() {
               </AnimatePresence>
             </li>
 
-            {NAV_LINKS.filter(l => l.label !== "Home").map(({ label, id }) => (
+            {NAV_LINKS.filter(l => l.label !== "Home" && l.label !== "About Us").map(({ label, id }) => (
               <li key={label}>
                 <a href={`/${id ? `#${id}` : ""}`} onClick={(e) => { e.preventDefault(); scrollTo(id); setMenuOpen(false); }}
                   className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2">
