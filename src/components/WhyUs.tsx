@@ -5,23 +5,23 @@ import { useTilt } from "../hooks/useTilt";
 const WHY_CARDS = [
   {
     icon:  ShieldCheck,
-    title: "Decades of Professional Excellence",
-    body:  "With deep-rooted expertise in Indian financial, regulatory, and taxation frameworks, we bring seasoned knowledge that translates into accurate, compliant, and strategic solutions for every client.",
+    title: "Senior Expertise, Not Junior Hand-offs",
+    body:  "Your engagement is led by seasoned professionals with decades in Indian financial, regulatory, and taxation frameworks. The person who understands your business is the person who signs the opinion.",
   },
   {
     icon:  Layers,
-    title: "End-to-End Solutions",
-    body:  "Offering a comprehensive suite of accounting, tax, regulatory, and assurance services under one roof, eliminating the need for multiple independent advisors.",
+    title: "One Firm for Every Question",
+    body:  "Audit, tax, regulatory, and advisory under one roof - so a GST notice, a transfer pricing query, and a statutory audit are handled by one team that already knows your business, not three advisors starting from zero.",
   },
   {
     icon:  Globe2,
-    title: "Expertise Across Diverse Industries",
-    body:  "We serve clients across Infrastructure, Manufacturing, Construction, Information Technology, and more-including listed companies, large MNCs, and high-growth start-ups. Our cross-sector exposure ensures practical, informed advice.",
+    title: "We Speak Your Industry",
+    body:  "From Real Estate to Manufacturing, IT to Education, Startups to MNCs - our cross-sector depth means advice grounded in how your industry actually operates, not generic interpretations of the law.",
   },
   {
     icon:  Cpu,
-    title: "Technology-Driven Practice",
-    body:  "We leverage modern accounting platforms and digital tools to deliver faster, more accurate, and transparent services-combining traditional professional values with new-age efficiency.",
+    title: "Traditional Rigour, Modern Speed",
+    body:  "Modern accounting platforms and digital workflows mean faster turnarounds, fewer errors, and full transparency into where your work stands - without compromising the diligence a signature demands.",
   },
 ];
 
@@ -87,7 +87,7 @@ export default function WhyUs() {
             <span className="font-serif italic font-normal text-slate-700">difference</span>
           </h2>
           <p className="text-base text-slate-500 font-sans leading-relaxed">
-            Four pillars that define our commitment to delivering unmatched professional value.
+            Why over 1000 businesses - from listed companies to first-time founders - choose to stay with us.
           </p>
         </motion.div>
 

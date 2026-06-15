@@ -2,9 +2,9 @@ import { motion } from "motion/react";
 import { Award, Globe, Users } from "lucide-react";
 
 const STATS = [
-  { icon: Award,  value: "Decades",  label: "of Excellence"       },
-  { icon: Globe,  value: "4",        label: "Industry Verticals Served" },
-  { icon: Users,  value: "1000+",    label: "Clients Across India"      },
+  { icon: Award,  value: "Decades",  label: "of Professional Practice" },
+  { icon: Globe,  value: "6+",       label: "Industries Served"        },
+  { icon: Users,  value: "1000+",    label: "Clients Across India"     },
 ];
 
 const fadeUp = {
@@ -46,11 +46,11 @@ export default function About() {
             className="lg:col-span-5 space-y-8"
           >
             <h2 className="text-4xl sm:text-5xl font-sans font-extrabold tracking-tight text-slate-950 leading-[1.1]">
-              A trusted advisory{" "}
+              The firm behind{" "}
               <span className="font-serif italic font-normal text-slate-700">
-                partner,
+                confident
               </span>{" "}
-              at every stage.
+              decisions.
             </h2>
 
             {/* Gold rule */}
@@ -79,42 +79,47 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="lg:col-span-7 space-y-6"
           >
-            {/* Decorative large quote mark */}
-            <div className="text-[80px] leading-none font-serif text-[#D4AF37]/20 select-none -mb-4">&ldquo;</div>
-
             <p className="text-base sm:text-lg text-slate-600 font-sans leading-relaxed">
-              <span className="font-semibold text-slate-900">B K AGARWAL &amp; CO., Chartered Accountants (BKA)</span> is a
-              contemporary Accounting and Regulatory Services firm committed to delivering excellence across a diverse range
-              of industries. With deep-rooted expertise spanning{" "}
-              <span className="text-slate-800 font-medium">Infrastructure, Manufacturing, Construction, and Information Technology</span>,
-              BKA has established itself as a trusted advisory partner for organisations at every stage of their growth journey.
+              Founded on the principles of <span className="font-semibold text-slate-900">integrity, expertise, and client-centricity</span>,{" "}
+              <span className="font-semibold text-slate-900">B K Agarwal &amp; Co., Chartered Accountants (BKA)</span> delivers
+              comprehensive Accounting, Tax and Regulatory Services to organisations navigating dynamic and competitive landscapes.
             </p>
 
             <p className="text-base text-slate-600 font-sans leading-relaxed">
-              Our distinguished client portfolio encompasses publicly listed companies, prominent multinational corporations,
-              and high-potential start-ups - reflecting the breadth of our capabilities and the confidence our clients place in us.
+              BKA's practice spans{" "}
+              <span className="text-slate-800 font-medium">Real Estate, Manufacturing, Information Technology, BPOs, KPOs, Healthcare and Education</span>{" "}
+              — sectors that demand both technical precision and strategic insight. Our distinguished client base includes
+              publicly listed entities, multinational corporations, high-growth start-ups, SMEs, Hospitals and educational
+              institutions, each relying on us for advice that is as actionable as it is sound.
             </p>
 
             <p className="text-base text-slate-600 font-sans leading-relaxed">
-              At the helm of BKA is a team of seasoned professionals driven by a singular commitment: to deliver{" "}
-              <span className="text-slate-800 font-medium">informed, pragmatic, and high-quality solutions</span> that create
-              tangible value for our clients.
+              We are guided by a leadership team of seasoned professionals who bring{" "}
+              <span className="text-slate-800 font-medium">clarity to complexity</span> and long-term perspective to every
+              client engagement.
             </p>
-
-            {/* Industry Tags */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              {["Infrastructure", "Manufacturing", "Construction", "Information Technology"].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full text-[11px] font-sans font-semibold bg-slate-50 border border-slate-200 text-slate-700"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
           </motion.div>
 
         </div>
+
+        {/* Industry Tags — full width below both columns */}
+        <div className="flex flex-wrap gap-5 mt-12">
+          {["Real Estate", "Manufacturing", "Information Technology", "BPOs", "KPOs", "Healthcare", "Education", "Hospitals", "Startups", "MNCs"].map((tag, i) => (
+            <motion.span
+              key={tag}
+              initial={{ opacity: 0, y: 20, scale: 0.88 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.055, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.08, y: -3, backgroundColor: "#D4AF3712", borderColor: "#D4AF37", color: "#b8962e", transition: { duration: 0.2, ease: "easeOut" } }}
+              whileTap={{ scale: 0.96, transition: { duration: 0.1 } }}
+              className="px-5 py-2 rounded-full text-sm font-sans font-semibold bg-slate-50 border border-slate-200 text-slate-700 cursor-default transition-colors duration-200"
+            >
+              {tag}
+            </motion.span>
+          ))}
+        </div>
+
       </div>
     </section>
   );

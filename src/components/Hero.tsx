@@ -5,7 +5,7 @@ const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
 
 const VIDEO_DESKTOP = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,vc_auto,w_1280/v1780309002/download_1_imksli.mp4";
 const VIDEO_MOBILE  = "https://res.cloudinary.com/deyyfnfxq/video/upload/q_auto,vc_auto,w_720/v1780317118/download_2_eica2h.mp4";
-// First frame of the video served as JPEG — loads in ~100ms and acts as placeholder
+// First frame of the video served as JPEG - loads in ~100ms and acts as placeholder
 const POSTER        = "https://res.cloudinary.com/deyyfnfxq/video/upload/so_0.0,q_auto,w_1280/v1780309002/download_1_imksli.jpg";
 
 export default function Hero() {
@@ -152,7 +152,7 @@ export default function Hero() {
           }}
         >
           {mobile ? (
-            /* Mobile: plain autoplay video — no canvas overhead, loads instantly */
+            /* Mobile: plain autoplay video - no canvas overhead, loads instantly */
             <video
               src={VIDEO_MOBILE}
               autoPlay

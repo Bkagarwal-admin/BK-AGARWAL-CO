@@ -1,6 +1,6 @@
 const WHATSAPP_NUMBER = "919341551773";
 const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hello BK Agarwal & Co,\n\nI visited your website and would like to enquire about your services. Could you please get in touch with me?\n\nThank you."
+  "Hello BKA,\n\nI visited your website and would like to enquire about your services. Could you please get in touch with me?\n\nThank you."
 );
 
 export default function WhatsappCTA() {

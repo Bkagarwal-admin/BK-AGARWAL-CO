@@ -1,4 +1,4 @@
-import { Shield, Database, FileText, Calculator, Scale, CheckSquare, Lightbulb } from "lucide-react";
+import { Shield, Database, FileText, Calculator, Scale, CheckSquare, Lightbulb, Package, Globe } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export interface ServiceItem { title: string; brief: string; }
@@ -109,11 +109,37 @@ export const SERVICES: ServiceCategory[] = [
     tagline: "Strategic advisory from startup structuring to Virtual CFO.",
     items: [
       { title: "Tax Structuring for Startups", brief: "Holistic entity and tax structuring advisory for founders at inception - covering choice of entity (Pvt Ltd vs LLP), ESOP scheme design under Section 62(1)(b), DPIIT recognition for the Section 80-IAC income tax holiday, and seed and Series-A investment structuring to maximise long-term founder tax efficiency." },
-      { title: "Virtual CFO Services", brief: "Dedicated fractional CFO support for growth-stage businesses - encompassing financial planning and analysis (FP&A), investor reporting, fundraising data room preparation, board-level presentations, MIS implementation, banking relationship management, and deployment of internal financial controls and ERP systems." },
+      { title: "Virtual CFO Services", brief: "Dedicated fractional CFO support built around seven core pillars: (1) Financial Planning & Forecasting — long-term budgeting, profitability analysis, and growth scenario modelling; (2) Treasury & Working Capital Management — optimising receivables and payables, cash flow forecasting, and treasury operations for liquidity efficiency; (3) Compliance & Regulatory Support — GST compliance and filing, income tax and TDS returns, MCA and ROC filings; (4) Management Reporting & MIS — monthly MIS reports, variance analysis, and cost tracking and expense control; (5) Fundraising & Investor Relations — preparing investor pitch decks, valuation analysis, and financial due diligence; (6) Risk Management & Internal Controls — internal audit support, risk assessment reports, and fraud prevention systems; (7) Strategic Advisory for Growth — mergers and acquisitions support, business restructuring, and performance benchmarking." },
       { title: "Transaction Structuring", brief: "Advisory on the optimal structuring of business acquisitions, mergers, demergers, slump sales, and joint ventures - considering stamp duty implications, capital gains tax, indirect transfer provisions under Section 9(1)(i), and the requirements of the Companies Act - to achieve the most commercially and tax-efficient outcome." },
       { title: "Foreign Trade Policy Matters", brief: "Advisory and operational support on India's Foreign Trade Policy including export obligation monitoring, RoDTEP and SEIS benefit optimisation, Advance Authorisation management, and EPCG licence compliance - maximising export incentive recoveries and maintaining zero-default status with DGFT." },
       { title: "Costing & Product-Pricing Assistance", brief: "Implementation of standard costing, activity-based costing, and marginal costing systems to support product pricing decisions, competitive tender bids, and cost reduction programmes. Particularly valuable for manufacturing, infrastructure, and FMCG clients seeking to protect margins in competitive markets." },
       { title: "Business Registrations (IEC, Labour, ESI, EPF)", brief: "Assistance in obtaining Import Export Code (IEC) from DGFT, Shop & Establishment licences, MSME (Udyam) registrations, Employees' State Insurance (ESI), Employees' Provident Fund (EPF), and other mandatory licences - enabling seamless commencement of operations across all regulatory touchpoints." },
+    ],
+  },
+  {
+    id: "customs",
+    category: "Customs",
+    icon: Package,
+    tagline: "End-to-end customs advisory — from duty recovery to warehouse operations.",
+    items: [
+      { title: "Duty Drawbacks / Refunds", brief: "Comprehensive assistance in claiming Duty Drawback under Sections 74 & 75 of the Customs Act, 1962, covering drawback on re-export of imported goods and on exports of manufactured products. We handle Fixation of Brand Rate of Drawback where standard rates are inadequate, and manage the claiming and follow-up of Refunds of EDD (Extra Duty Deposit) amount after finalization of SVB proceedings." },
+      { title: "Special Valuation Branch (SVB)", brief: "Complete SVB lifecycle management — Filing the Application for Finalization of SVB proceedings with the Customs; Co-ordination with the Customs Department at every stage of finalization; Obtaining the SVB Final Order from the Customs Department; Assessment of provisional Bills of Entry and ensuring they get finalized; Closure of PD Bond (Provisional Duty Bond) executed with the Customs Department; and Preparation, submission and obtaining the refund of EDD amount paid from the Customs Department." },
+      { title: "Authorized Economic Operator (AEO) Program", brief: "Advisory and facilitation for obtaining AEO certification under the Customs Act — covering eligibility assessment, documentation preparation, compliance gap analysis, and liaison with the AEO Programme Management Team. AEO status unlocks faster cargo clearance, reduced examinations, and priority treatment from Customs, providing a significant operational and cost advantage for frequent importers and exporters." },
+      { title: "MOOWR Scheme", brief: "Advisory and compliance support for the Manufacturing and Other Operations in Warehouse Regulation (MOOWR) Scheme under Section 65 of the Customs Act, 1962. We assist in obtaining warehouse licences, structuring operations to defer customs duty on imported inputs, and maintaining the required records and returns — enabling capital-efficient manufacturing without upfront duty outflow." },
+    ],
+  },
+  {
+    id: "ftp",
+    category: "Foreign Trade Policy",
+    icon: Globe,
+    tagline: "Import-export authorisations, DGFT filings, and SEZ advisory.",
+    items: [
+      { title: "Import Export Code (IEC) & RCMC", brief: "Obtaining the Certificate of Import Export Code (IEC) from DGFT — the mandatory licence for any entity engaged in import or export of goods or services. We also facilitate Registration Cum Membership Certificate (RCMC) from the relevant Export Promotion Council, which is required for availing a range of FTP benefits and authorisations." },
+      { title: "RoDTEP — Remission of Duties and Taxes on Exported Products", brief: "End-to-end advisory and filing support for Remission of Duties and Taxes on Exported Products (RoDTEP) claims. We assist exporters in correctly classifying their products under the RoDTEP schedule, computing eligible rates, filing declarations in shipping bills, and tracking credit into the ICEGATE ledger for timely scrip utilisation or transfer." },
+      { title: "Advance Authorization", brief: "Assistance in obtaining Advance Authorisation for duty-free import of inputs physically incorporated in export products. We handle the application to DGFT, obtain the licence, assist with Customs bonding, monitor export obligation fulfilment, file for Duty Free Import Authorisations (DFIA), manage Revalidation of import licences where needed, and apply for Deemed Export benefits under the applicable FTP provisions." },
+      { title: "Authorisation for Restricted Items", brief: "Facilitation of authorisations from DGFT for import or export of items appearing in the Restricted List under Schedule I and II of ITC (HS). We prepare and submit applications for specific licences, seek necessary clarifications and relaxations from the DGFT Policy Committee or Inter-Ministerial Committee, and ensure compliance with all conditions attached to the authorisation." },
+      { title: "Export Promotion Capital Goods (EPCG) Authorisations", brief: "Complete EPCG authorisation management — from filing the application with DGFT for duty-free import of capital goods, through customs registration, to monitoring export obligation discharge over the prescribed period. We also handle Closure of EPCG and Advance Authorisations with DGFT/Customs once export obligations are fulfilled, preventing excess duty demand and bond/BG releases." },
+      { title: "Special Economic Zones (SEZs) & 100% EOU", brief: "Advisory and compliance support for Special Economic Zone related matters — including unit approval, procurement of goods and services without payment of duties or taxes, NFE computation, and Annual Performance Report (APR) filing. We also provide 100% Export Oriented Unit (EOU) consultancy, covering LOP applications, bonding, duty-free procurement, and compliance with FEMA and Customs obligations." },
     ],
   },
 ];
