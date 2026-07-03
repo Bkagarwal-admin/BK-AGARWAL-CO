@@ -122,7 +122,7 @@ export default function Careers() {
             <span className="font-serif italic font-normal text-slate-700">with us</span>
           </h1>
           <p className="text-base text-slate-500 font-sans leading-relaxed">
-            We are always looking for driven professionals who value rigour, integrity, and growth.
+            We are looking for self-motivated professionals who value integrity and hard work.
             Tell us about yourself and share your resume - we&rsquo;ll reach out when there&rsquo;s a fit.
           </p>
         </motion.div>
@@ -142,10 +142,10 @@ export default function Careers() {
               </div>
               <h2 className="text-lg font-sans font-bold text-slate-900">Why work at B K Agarwal &amp; Co?</h2>
               <ul className="space-y-3 text-sm text-slate-500 font-sans leading-relaxed list-none m-0 p-0">
-                <li className="flex gap-3"><span className="text-[#D4AF37] shrink-0">—</span>Direct exposure to audit, tax, and advisory work across industries, from startups to listed companies.</li>
-                <li className="flex gap-3"><span className="text-[#D4AF37] shrink-0">—</span>Mentorship from senior professionals with decades of experience in Indian regulatory frameworks.</li>
+                <li className="flex gap-3"><span className="text-[#D4AF37] shrink-0">—</span>Exposure to all areas such as audit, tax, and advisory work across industries, from startups to listed companies.</li>
+                <li className="flex gap-3"><span className="text-[#D4AF37] shrink-0">—</span>Mentorship from experienced senior professionals with decades of experience.</li>
                 <li className="flex gap-3"><span className="text-[#D4AF37] shrink-0">—</span>Modern digital workflows alongside the diligence of a traditional practice.</li>
-                <li className="flex gap-3"><span className="text-[#D4AF37] shrink-0">—</span>Offices in Bangalore, Chennai, Mumbai, and Sonepat.</li>
+                <li className="flex gap-3"><span className="text-[#D4AF37] shrink-0">—</span>The firm works on PAN India basis.</li>
               </ul>
             </div>
           </motion.div>
