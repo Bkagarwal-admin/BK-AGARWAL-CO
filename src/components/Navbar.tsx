@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { SERVICES } from "../data/services";
@@ -47,6 +48,28 @@ export default function Navbar() {
   const [servicesOpen,   setServicesOpen]   = useState(false);
   const [mobileServices, setMobileServices] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // On the home page the links scroll; from any other route (e.g. /careers)
+  // they navigate back to / with a hash, and Home handles the scroll.
+  const goTo = (id: string | null) => {
+    if (location.pathname === "/") {
+      scrollTo(id);
+    } else {
+      navigate(id ? `/#${id}` : "/");
+      if (!id) window.scrollTo({ top: 0 });
+    }
+  };
+
+  const goToService = (index: number) => {
+    if (location.pathname === "/") {
+      selectService(index);
+    } else {
+      navigate("/");
+      setTimeout(() => selectService(index), 150);
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -77,7 +100,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-6 py-4 md:px-12">
 
           {/* Brand */}
-          <a href="/" onClick={(e) => { e.preventDefault(); scrollTo(null); }} className="flex items-center gap-3 group select-none">
+          <a href="/" onClick={(e) => { e.preventDefault(); goTo(null); }} className="flex items-center gap-3 group select-none">
             <img
               src="https://res.cloudinary.com/deyyfnfxq/image/upload/v1780005295/Screenshot_2026-03-27_at_7.40.54_AM-removebg-preview_uypeq3_okqfsg.png"
               alt="BK Agarwal & Co logo"
@@ -102,7 +125,7 @@ export default function Navbar() {
 
             {/* Home */}
             <li>
-              <a href="/" onClick={(e) => { e.preventDefault(); scrollTo(null); }} className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group">
+              <a href="/" onClick={(e) => { e.preventDefault(); goTo(null); }} className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group">
                 Home
                 <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
               </a>
@@ -112,7 +135,7 @@ export default function Navbar() {
             <li>
               <a
                 href="/#about"
-                onClick={(e) => { e.preventDefault(); scrollTo("about"); }}
+                onClick={(e) => { e.preventDefault(); goTo("about"); }}
                 className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
               >
                 About Us
@@ -128,7 +151,7 @@ export default function Navbar() {
               onMouseLeave={() => setServicesOpen(false)}
             >
               <button
-                onClick={() => scrollTo("services")}
+                onClick={() => goTo("services")}
                 className="relative flex items-center gap-1 text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group cursor-pointer"
               >
                 Services
@@ -159,7 +182,7 @@ export default function Navbar() {
                         return (
                           <button
                             key={s.id}
-                            onClick={() => { selectService(i); setServicesOpen(false); }}
+                            onClick={() => { goToService(i); setServicesOpen(false); }}
                             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left hover:bg-slate-50 transition-colors duration-150 cursor-pointer group/item"
                           >
                             <div className="w-7 h-7 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0">
@@ -182,7 +205,7 @@ export default function Navbar() {
               <li key={label}>
                 <a
                   href={`/${id ? `#${id}` : ""}`}
-                  onClick={(e) => { e.preventDefault(); scrollTo(id); }}
+                  onClick={(e) => { e.preventDefault(); goTo(id); }}
                   className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
                 >
                   {label}
@@ -190,6 +213,18 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
+
+            {/* Careers - separate route */}
+            <li>
+              <Link
+                to="/careers"
+                onClick={() => window.scrollTo({ top: 0 })}
+                className="relative text-[11px] font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
+              >
+                Careers
+                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
+              </Link>
+            </li>
           </ul>
 
           {/* Mobile Hamburger */}
@@ -215,7 +250,7 @@ export default function Navbar() {
         >
           <ul className="flex flex-col px-6 py-4 gap-1">
             <li>
-              <a href="/" onClick={(e) => { e.preventDefault(); scrollTo(null); setMenuOpen(false); }}
+              <a href="/" onClick={(e) => { e.preventDefault(); goTo(null); setMenuOpen(false); }}
                 className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2">
                 Home
               </a>
@@ -223,7 +258,7 @@ export default function Navbar() {
 
             {/* About Us */}
             <li>
-              <a href="/#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); setMenuOpen(false); }}
+              <a href="/#about" onClick={(e) => { e.preventDefault(); goTo("about"); setMenuOpen(false); }}
                 className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2">
                 About Us
               </a>
@@ -250,7 +285,7 @@ export default function Navbar() {
                     {SERVICES.map((s, i) => (
                       <li key={s.id}>
                         <button
-                          onClick={() => { selectService(i); setMenuOpen(false); setMobileServices(false); }}
+                          onClick={() => { goToService(i); setMenuOpen(false); setMobileServices(false); }}
                           className="w-full text-left text-[12px] font-sans text-slate-600 hover:text-[#D4AF37] transition-colors py-1.5 cursor-pointer"
                         >
                           {s.category}
@@ -264,12 +299,23 @@ export default function Navbar() {
 
             {NAV_LINKS.filter(l => l.label !== "Home" && l.label !== "About Us").map(({ label, id }) => (
               <li key={label}>
-                <a href={`/${id ? `#${id}` : ""}`} onClick={(e) => { e.preventDefault(); scrollTo(id); setMenuOpen(false); }}
+                <a href={`/${id ? `#${id}` : ""}`} onClick={(e) => { e.preventDefault(); goTo(id); setMenuOpen(false); }}
                   className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2">
                   {label}
                 </a>
               </li>
             ))}
+
+            {/* Careers - separate route */}
+            <li>
+              <Link
+                to="/careers"
+                onClick={() => { window.scrollTo({ top: 0 }); setMenuOpen(false); }}
+                className="text-sm font-sans font-semibold text-slate-700 hover:text-[#D4AF37] transition-colors block py-2"
+              >
+                Careers
+              </Link>
+            </li>
           </ul>
         </div>
 
