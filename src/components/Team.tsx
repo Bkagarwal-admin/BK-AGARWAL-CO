@@ -1,44 +1,68 @@
 import { motion } from "motion/react";
+import { Linkedin, Mail, User } from "lucide-react";
 
 // Replace `photo` with Cloudinary URLs and update names, roles, and
 // descriptions when the client shares final member details (5-8 members).
-// Leave `photo` as "" to show an initials placeholder.
-const TEAM_MEMBERS = [
+// `photo`, `linkedin`, and `email` are optional - leave "" to hide them.
+type Member = {
+  name:     string;
+  role:     string;
+  photo:    string;
+  body:     string;
+  linkedin: string;
+  email:    string;
+};
+
+// NOTE: photos below are temporary stock placeholders. Swap each `photo`
+// with the member's Cloudinary URL when the client shares final details.
+const TEAM_MEMBERS: Member[] = [
   {
     name:  "Member Name",
     role:  "Designation",
-    photo: "",
+    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
     body:  "A short professional description of this team member - their qualifications, areas of expertise, and years of experience will go here.",
+    linkedin: "",
+    email:    "",
   },
   {
     name:  "Member Name",
     role:  "Designation",
-    photo: "",
+    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
     body:  "A short professional description of this team member - their qualifications, areas of expertise, and years of experience will go here.",
+    linkedin: "",
+    email:    "",
   },
   {
     name:  "Member Name",
     role:  "Designation",
-    photo: "",
+    photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
     body:  "A short professional description of this team member - their qualifications, areas of expertise, and years of experience will go here.",
+    linkedin: "",
+    email:    "",
   },
   {
     name:  "Member Name",
     role:  "Designation",
-    photo: "",
+    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
     body:  "A short professional description of this team member - their qualifications, areas of expertise, and years of experience will go here.",
+    linkedin: "",
+    email:    "",
   },
   {
     name:  "Member Name",
     role:  "Designation",
-    photo: "",
+    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
     body:  "A short professional description of this team member - their qualifications, areas of expertise, and years of experience will go here.",
+    linkedin: "",
+    email:    "",
   },
   {
     name:  "Member Name",
     role:  "Designation",
-    photo: "",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
     body:  "A short professional description of this team member - their qualifications, areas of expertise, and years of experience will go here.",
+    linkedin: "",
+    email:    "",
   },
 ];
 
@@ -60,7 +84,8 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-function TeamCard({ name, role, photo, body, index }: { name: string; role: string; photo: string; body: string; index: number }) {
+function TeamCard({ name, role, photo, body, linkedin, email, index }: Member & { index: number }) {
+  const hasSocials = Boolean(linkedin || email);
   return (
     <motion.div
       custom={index}
@@ -68,40 +93,77 @@ function TeamCard({ name, role, photo, body, index }: { name: string; role: stri
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="group relative flex flex-col rounded-xl bg-white border border-slate-100 shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-md"
+      className="group relative flex flex-col rounded-2xl bg-white border border-slate-100 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
     >
-      <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+      {/* Portrait */}
+      <div className="relative aspect-[4/3] overflow-hidden">
         {photo ? (
           <img
             src={photo}
             alt={name}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-200">
-            <span className="text-4xl font-sans font-extrabold text-slate-300 select-none">{initials(name)}</span>
+          <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-slate-100 to-slate-200">
+            <User className="w-12 h-12 text-slate-300" strokeWidth={1.25} />
+            <span className="text-3xl font-sans font-extrabold text-slate-300 select-none tracking-wide">
+              {initials(name)}
+            </span>
+          </div>
+        )}
+
+        {/* Gradient scrim - deepens on hover for readable overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300" />
+
+        {/* Index badge */}
+        <span className="absolute top-4 right-4 text-[11px] font-mono font-bold text-white/70 select-none">
+          0{index + 1}
+        </span>
+
+        {/* Name + role over image */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 space-y-0.5">
+          <h3 className="text-lg font-sans font-bold text-white leading-snug drop-shadow-sm">{name}</h3>
+          <p className="text-[11px] font-mono tracking-widest text-[#e6c65c] uppercase">{role}</p>
+        </div>
+
+        {/* Social icons - slide in on hover */}
+        {hasSocials && (
+          <div className="absolute top-4 left-4 flex flex-col gap-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+            {linkedin && (
+              <a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${name} on LinkedIn`}
+                className="w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:bg-[#D4AF37] hover:text-white text-slate-700 transition-colors duration-200">
+                <Linkedin className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {email && (
+              <a href={`mailto:${email}`} aria-label={`Email ${name}`}
+                className="w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:bg-[#D4AF37] hover:text-white text-slate-700 transition-colors duration-200">
+                <Mail className="w-3.5 h-3.5" />
+              </a>
+            )}
           </div>
         )}
       </div>
 
-      <div className="flex flex-col gap-3 p-6">
-        <div className="space-y-0.5">
-          <h3 className="text-base font-sans font-bold text-slate-900 leading-snug">{name}</h3>
-          <p className="text-[11px] font-mono tracking-widest text-[#D4AF37] uppercase">{role}</p>
-        </div>
+      {/* Description */}
+      <div className="p-6">
         <p className="text-sm text-slate-500 font-sans leading-relaxed">{body}</p>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] rounded-full group-hover:w-full transition-all duration-500" />
+      {/* Gold underline sweep */}
+      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-500" />
     </motion.div>
   );
 }
 
 export default function Team() {
   return (
-    <section id="team" className="bg-white py-24 sm:py-32 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="team" className="relative bg-[#FAFAFA] py-24 sm:py-32 border-b border-slate-100 overflow-hidden">
+      {/* Subtle background accent */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
 
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -123,7 +185,7 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {TEAM_MEMBERS.map((member, i) => (
             <TeamCard key={i} {...member} index={i} />
           ))}
