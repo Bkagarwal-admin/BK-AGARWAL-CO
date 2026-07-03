@@ -17,6 +17,8 @@ const DESIGNATIONS = [
   "Tax Consultant",
   "Accounts Executive",
   "Semi-Qualified / Paid Assistant",
+  "Human Resources",
+  "B.COM Fresher / Experienced",
   "Other",
 ];
 
