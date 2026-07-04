@@ -71,7 +71,12 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => {
+      if (window.scrollY > 60) setScrolled(true);
+      else if (window.scrollY < 5) setScrolled(false);
+      // Between 5–60px: keep current state (prevents content bleeding through
+      // during smooth scroll back to top)
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
