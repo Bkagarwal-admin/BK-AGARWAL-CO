@@ -185,7 +185,7 @@ export default function Hero() {
                   Plan Your Taxes.
                 </h1>
                 <p className="text-sm sm:text-base text-slate-600 font-sans max-w-lg leading-relaxed">
-                  From bookkeeping and taxation to compliance and audit - we handle every financial step for startups, SMEs, and individuals.
+                  Right from registration, accounting, and taxation, fund raising, MIS and compliance — we help Startups, MNCs, Listed Companies, SMEs and individuals stay compliant and financially confident.
                 </p>
               </div>
 
