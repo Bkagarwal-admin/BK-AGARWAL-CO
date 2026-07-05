@@ -182,10 +182,10 @@ export default function Hero() {
                 <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-slate-900 leading-[1.2]">
                   Know Your Numbers.<br />
                   <span className="font-serif italic font-semibold text-[#D4AF37]">Grow Profit.</span><br />
-                  Plan Your Taxes.
+                  Save Big on Better Planning.
                 </h1>
                 <p className="text-sm sm:text-base text-slate-600 font-sans max-w-lg leading-relaxed">
-                  Right from registration, accounting, and taxation, fund raising, MIS and compliance — we help Startups, MNCs, Listed Companies, SMEs and individuals stay compliant and financially confident.
+                  Right from registration, accounting, and taxation, fund raising, MIS and compliance - we help Startups, MNCs, Listed Companies, SMEs and individuals stay compliant and financially confident.
                 </p>
               </div>
 
