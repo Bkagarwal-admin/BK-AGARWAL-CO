@@ -182,10 +182,10 @@ export default function Hero() {
                 <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-sans font-extrabold tracking-tight text-slate-900 leading-[1.2]">
                   Know Your Numbers.<br />
                   <span className="font-serif italic font-semibold text-[#D4AF37]">Grow Profit.</span><br />
-                  Save Big On Taxes.
+                  Plan Your Taxes.
                 </h1>
                 <p className="text-sm sm:text-base text-slate-600 font-sans max-w-lg leading-relaxed">
-                  From audit to taxation, we help startups, SMEs, and individuals stay compliant and financially confident.
+                  From bookkeeping and taxation to compliance and audit - we handle every financial step for startups, SMEs, and individuals.
                 </p>
               </div>
 

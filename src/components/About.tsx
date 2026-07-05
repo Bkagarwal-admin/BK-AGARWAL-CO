@@ -94,9 +94,10 @@ export default function About() {
             </p>
 
             <p className="text-base text-slate-600 font-sans leading-relaxed">
-              We are guided by a leadership team of seasoned professionals who bring{" "}
-              <span className="text-slate-800 font-medium">clarity to complexity</span> and long-term perspective to every
-              client engagement.
+              B K Agarwal &amp; Co. is a{" "}
+              <span className="text-slate-800 font-medium">peer-reviewed firm</span>, holding a valid certificate from the{" "}
+              <span className="text-slate-800 font-medium">Peer Review Board of the Institute of Chartered Accountants of India (ICAI)</span>.
+              This certification verifies that our systems, procedures, and assurance services comply with professional and ethical standards.
             </p>
           </motion.div>
 
