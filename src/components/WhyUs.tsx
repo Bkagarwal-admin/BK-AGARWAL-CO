@@ -5,23 +5,23 @@ import { useTilt } from "../hooks/useTilt";
 const WHY_CARDS = [
   {
     icon:  ShieldCheck,
-    title: "Senior Expertise, Not Junior Hand-offs",
-    body:  "Your engagement is led by seasoned professionals with decades in Indian financial, regulatory, and taxation frameworks. The person who understands your business is the person who signs the opinion.",
+    title: "Experienced Professionals, Trusted Advice",
+    body:  "Your engagement is led by seasoned professionals with decades of experience in Indian financial, regulatory, and taxation frameworks. The person who understands your business is the person who signs the opinion.",
   },
   {
     icon:  Layers,
-    title: "One Firm for Every Question",
-    body:  "Audit, tax, regulatory, and advisory under one roof - so a GST notice, a transfer pricing query, and a statutory audit are handled by one team that already knows your business, not three advisors starting from zero.",
+    title: "End-to-End Expertise, One Trusted Partner",
+    body:  "Accounting, audit, tax, regulatory, and advisory support - seamlessly integrated under one roof.",
   },
   {
     icon:  Globe2,
-    title: "We Speak Your Industry",
-    body:  "From Real Estate to Manufacturing, IT to Education, Startups to MNCs - our cross-sector depth means advice grounded in how your industry actually operates, not generic interpretations of the law.",
+    title: "We Understand Your Industry",
+    body:  "From Real Estate to Manufacturing, IT to Education, Startups to MNCs, our cross-sector experience means advice grounded in how your industry actually functions, not generic interpretations of the law.",
   },
   {
     icon:  Cpu,
     title: "Traditional Rigour, Modern Speed",
-    body:  "Modern accounting platforms and digital workflows mean faster turnarounds, fewer errors, and full transparency into where your work stands - without compromising the diligence a signature demands.",
+    body:  "Modern accounting platforms and digital workflows enable faster turnarounds, fewer errors, and complete transparency into where your work stands - without compromising the diligence every signature demands.",
   },
 ];
 
