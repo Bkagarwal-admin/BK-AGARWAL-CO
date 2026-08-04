@@ -197,7 +197,7 @@ export default function Hero() {
                   BOOK A CONSULTATION
                 </button>
                 <button
-                  onClick={() => window.scrollTo({ top: window.innerHeight * 0.9, behavior: "smooth" })}
+                  onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
                   className="px-4 sm:px-5 py-2.5 sm:py-3 rounded bg-white hover:bg-slate-100 text-slate-900 border border-slate-200 font-sans text-xs font-semibold tracking-wider transition-all cursor-pointer shadow-sm"
                 >
                   VIEW SERVICES
