@@ -68,7 +68,7 @@ function WhyCard({ icon: Icon, title, body, index }: { icon: LucideIcon; title: 
 
 export default function WhyUs() {
   return (
-    <section id="why-us" className="bg-[#FAFAFA] py-24 sm:py-32 border-b border-slate-100">
+    <section id="why-us" className="bg-[#FAFAFA] pt-0 pb-24 sm:pb-32">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         <motion.div
