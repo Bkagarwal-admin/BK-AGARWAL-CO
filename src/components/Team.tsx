@@ -114,7 +114,7 @@ function TeamCard({ name, credentials, role, badge, summary, index, className = 
         </div>
 
         <div className="min-w-0 space-y-2 pt-1">
-          <h3 className="text-xl font-sans font-bold text-slate-950 leading-snug">{name}</h3>
+          <h3 className="text-xl sm:text-lg xl:text-xl font-sans font-bold text-slate-950 leading-snug break-words">{name}</h3>
           {credentials.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {credentials.map((c) => (
@@ -124,10 +124,10 @@ function TeamCard({ name, credentials, role, badge, summary, index, className = 
               ))}
             </div>
           )}
-          <p className="text-[11px] font-mono tracking-widest text-slate-500 uppercase">
-            {role}
-            {badge && <span className="ml-2 px-1.5 py-0.5 rounded bg-slate-900 text-[9px] font-bold tracking-wider text-[#e6c65c]">{badge}</span>}
-          </p>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+            <p className="text-[11px] font-mono tracking-widest text-slate-500 uppercase">{role}</p>
+            {badge && <span className="whitespace-nowrap px-1.5 py-0.5 rounded bg-slate-900 text-[9px] font-mono font-bold tracking-wider text-[#e6c65c] uppercase">{badge}</span>}
+          </div>
         </div>
       </div>
 
