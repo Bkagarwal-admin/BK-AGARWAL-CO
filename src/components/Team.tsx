@@ -142,7 +142,15 @@ function TeamCard({ name, credentials, role, badge, summary, index, className = 
   );
 }
 
-export default function Team() {
+// "3col" (default): 3 per row, a lone last card is centred.
+// "2col": 2 per row. Used by the temporary /team-layout-b preview page.
+export type TeamLayout = "3col" | "2col";
+
+export default function Team({ layout = "3col" }: { layout?: TeamLayout }) {
+  const gridCols = layout === "2col"
+    ? "grid-cols-1 sm:grid-cols-2"
+    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+
   return (
     <section id="team" className="relative bg-[#FAFAFA] pt-0 pb-24 sm:pb-32 border-b border-slate-100 overflow-hidden">
       {/* Subtle background accent */}
@@ -170,10 +178,10 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <div className={`grid ${gridCols} gap-6 lg:gap-8 items-stretch`}>
           {TEAM_MEMBERS.map((member, i) => {
             // On the 3-column layout, centre a lone card on the last row.
-            const isLoneLast = i === TEAM_MEMBERS.length - 1 && TEAM_MEMBERS.length % 3 === 1;
+            const isLoneLast = layout === "3col" && i === TEAM_MEMBERS.length - 1 && TEAM_MEMBERS.length % 3 === 1;
             return (
               <TeamCard key={i} {...member} index={i} className={isLoneLast ? "lg:col-start-2" : ""} />
             );
