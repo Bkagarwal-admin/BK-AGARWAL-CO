@@ -58,6 +58,12 @@ const TEAM_MEMBERS: Member[] = [
     summary:     "13 years in audit support, statutory and tax audits and internal controls over financial reporting, including audits of complex manufacturing and IT companies.",
   },
   {
+    name:        "Tousif Rahman",
+    credentials: ["FCA"],
+    role:        "Chartered Accountant",
+    summary:     "Commerce graduate and FCA with 11 years of post-qualification experience in audit and taxation.",
+  },
+  {
     name:        "Sachi Agarwal",
     credentials: ["FCA"],
     role:        "Chartered Accountant",
@@ -76,7 +82,7 @@ const cardVariant = {
   visible: (i: number) => ({
     opacity:    1,
     y:          0,
-    transition: { duration: 0.55, delay: (i % 3) * 0.1, ease: "easeOut" as const },
+    transition: { duration: 0.55, delay: (i % 2) * 0.1, ease: "easeOut" as const },
   }),
 };
 
@@ -164,7 +170,7 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           {TEAM_MEMBERS.map((member, i) => (
             <TeamCard key={i} {...member} index={i} />
           ))}
