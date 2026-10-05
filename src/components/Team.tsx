@@ -82,7 +82,7 @@ const cardVariant = {
   visible: (i: number) => ({
     opacity:    1,
     y:          0,
-    transition: { duration: 0.55, delay: (i % 2) * 0.1, ease: "easeOut" as const },
+    transition: { duration: 0.55, delay: (i % 3) * 0.1, ease: "easeOut" as const },
   }),
 };
 
@@ -95,7 +95,7 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-function TeamCard({ name, credentials, role, badge, summary, index }: Member & { index: number }) {
+function TeamCard({ name, credentials, role, badge, summary, index, className = "" }: Member & { index: number; className?: string }) {
   return (
     <motion.div
       custom={index}
@@ -103,7 +103,7 @@ function TeamCard({ name, credentials, role, badge, summary, index }: Member & {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="group relative flex flex-col h-full rounded-2xl bg-white border border-slate-100 shadow-sm overflow-hidden p-6 sm:p-7 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+      className={`group relative flex flex-col h-full rounded-2xl bg-white border border-slate-100 shadow-sm overflow-hidden p-6 sm:p-7 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}
     >
       {/* Header: monogram + name, credentials, role */}
       <div className="flex items-start gap-5">
@@ -170,10 +170,14 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-          {TEAM_MEMBERS.map((member, i) => (
-            <TeamCard key={i} {...member} index={i} />
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          {TEAM_MEMBERS.map((member, i) => {
+            // On the 3-column layout, centre a lone card on the last row.
+            const isLoneLast = i === TEAM_MEMBERS.length - 1 && TEAM_MEMBERS.length % 3 === 1;
+            return (
+              <TeamCard key={i} {...member} index={i} className={isLoneLast ? "lg:col-start-2" : ""} />
+            );
+          })}
         </div>
 
       </div>
