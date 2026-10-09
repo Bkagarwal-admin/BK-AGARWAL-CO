@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Services from "./components/Services";
 import WhyUs from "./components/WhyUs";
-import Team, { type TeamLayout } from "./components/Team";
+import Team from "./components/Team";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Careers from "./components/Careers";
@@ -14,7 +14,7 @@ import WhatsappCTA from "./components/WhatsappCTA";
 
 const NAV_OFFSET = 80;
 
-function Home({ teamLayout = "3col" }: { teamLayout?: TeamLayout }) {
+function Home() {
   const { hash } = useLocation();
 
   // When arriving at /#section (e.g. from the Careers page), scroll to it
@@ -37,7 +37,7 @@ function Home({ teamLayout = "3col" }: { teamLayout?: TeamLayout }) {
       <About />
       <Services />
       <WhyUs />
-      <Team layout={teamLayout} />
+      <Team />
       <Testimonials />
       <Contact />
     </>
@@ -52,8 +52,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/careers" element={<Careers />} />
-          {/* TEMPORARY: Team layout B (2 per row) for client preview. Remove once a layout is chosen. */}
-          <Route path="/team-layout-b" element={<Home teamLayout="2col" />} />
         </Routes>
         <Footer />
         <WhatsappCTA />

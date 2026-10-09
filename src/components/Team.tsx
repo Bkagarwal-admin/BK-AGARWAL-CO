@@ -18,17 +18,17 @@ const TEAM_MEMBERS: Member[] = [
     credentials: ["FCA", "CS", "CISA"],
     role:        "Chartered Accountant",
     badge:       "Ex-Big4",
-    summary:     "17+ years in indirect tax, internal financial control, audit and CFO services, including four years at PwC. Serves Fortune 500 clients and regularly trains on GST.",
+    summary:     "17+ years in Indirect Tax, Internal Financial Controls, Assurance and CFO Services, including a four-year stint at PwC. Represents clients in GST investigations, including search, seizure and summons proceedings, and advises Fortune 500 companies. A regular trainer on GST.",
   },
   {
     name:        "Pramod Kumar Goenka",
     credentials: ["FCA"],
     role:        "Chartered Accountant",
-    summary:     "43+ years in taxation and accountancy, handling direct and indirect tax matters up to the Supreme Court. Currently active in GST advisory and a regular speaker on GST.",
+    summary:     "43+ years in taxation and accountancy, assisting clients in direct and indirect tax matters up to the Supreme Court. Currently focused on GST advisory and a regular speaker on GST.",
   },
   {
     name:        "Ashish Agarwal",
-    credentials: ["FCA"],
+    credentials: ["FCA", "DISA"],
     role:        "Chartered Accountant",
     summary:     "18+ years across accounting, audit, taxation and company law. Expert in income tax matters and scrutiny cases, and has provided CFO support to various companies.",
   },
@@ -142,15 +142,7 @@ function TeamCard({ name, credentials, role, badge, summary, index, className = 
   );
 }
 
-// "3col" (default): 3 per row, a lone last card is centred.
-// "2col": 2 per row. Used by the temporary /team-layout-b preview page.
-export type TeamLayout = "3col" | "2col";
-
-export default function Team({ layout = "3col" }: { layout?: TeamLayout }) {
-  const gridCols = layout === "2col"
-    ? "grid-cols-1 sm:grid-cols-2"
-    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
-
+export default function Team() {
   return (
     <section id="team" className="relative bg-[#FAFAFA] pt-0 pb-24 sm:pb-32 border-b border-slate-100 overflow-hidden">
       {/* Subtle background accent */}
@@ -178,10 +170,10 @@ export default function Team({ layout = "3col" }: { layout?: TeamLayout }) {
           </p>
         </motion.div>
 
-        <div className={`grid ${gridCols} gap-6 lg:gap-8 items-stretch`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {TEAM_MEMBERS.map((member, i) => {
             // On the 3-column layout, centre a lone card on the last row.
-            const isLoneLast = layout === "3col" && i === TEAM_MEMBERS.length - 1 && TEAM_MEMBERS.length % 3 === 1;
+            const isLoneLast = i === TEAM_MEMBERS.length - 1 && TEAM_MEMBERS.length % 3 === 1;
             return (
               <TeamCard key={i} {...member} index={i} className={isLoneLast ? "lg:col-start-2" : ""} />
             );
