@@ -107,9 +107,9 @@ export default function Navbar() {
           {/* Brand */}
           <a href="/" onClick={(e) => { e.preventDefault(); goTo(null); }} className="flex items-center gap-3 group select-none">
             <img
-              src="https://res.cloudinary.com/deyyfnfxq/image/upload/v1780005295/Screenshot_2026-03-27_at_7.40.54_AM-removebg-preview_uypeq3_okqfsg.png"
+              src="https://res.cloudinary.com/deyyfnfxq/image/upload/e_trim/v1791571060/Screenshot_2026-10-10_at_12.05.09_AM-removebg-preview_ebxoj0.png"
               alt="BK Agarwal & Co logo"
-              className="h-13 w-auto object-contain select-none"
+              className="h-13 w-20 object-contain select-none"
             />
             <div className="leading-none">
               <span className="block font-sans font-extrabold tracking-tight text-lg text-slate-900 transition-colors duration-500">
