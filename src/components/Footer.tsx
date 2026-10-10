@@ -10,9 +10,9 @@ export default function Footer() {
           <div className="space-y-1.5">
             <div className="flex items-center gap-2.5">
               <img
-                src="https://res.cloudinary.com/deyyfnfxq/image/upload/v1780005295/Screenshot_2026-03-27_at_7.40.54_AM-removebg-preview_uypeq3_okqfsg.png"
+                src="https://res.cloudinary.com/deyyfnfxq/image/upload/e_trim/v1791571060/Screenshot_2026-10-10_at_12.05.09_AM-removebg-preview_ebxoj0.png"
                 alt="BK Agarwal & Co logo"
-                className="h-8 w-auto object-contain"
+                className="h-8 w-[49px] object-contain"
               />
               <span className="font-sans font-extrabold text-slate-900 tracking-tight text-base">
                 B K AGARWAL &amp; CO
