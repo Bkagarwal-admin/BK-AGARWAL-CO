@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Services from "./components/Services";
 import WhyUs from "./components/WhyUs";
+import Team from "./components/Team";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Careers from "./components/Careers";
@@ -36,6 +37,7 @@ function Home() {
       <About />
       <Services />
       <WhyUs />
+      <Team />
       <Testimonials />
       <Contact />
     </>
