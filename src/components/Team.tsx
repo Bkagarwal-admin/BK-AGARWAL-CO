@@ -1,9 +1,10 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 
 // Photos are not available, so each card shows a monogram of the member's
 // initials. `credentials` render as small tags next to the name (e.g. FCA,
-// CISA); `badge` is an optional dark pill (e.g. "Ex-Big4"); `summary` is a
-// short 2-3 line description.
+// CISA); `badge` is an optional dark pill (e.g. "Ex-Big4"); `summary` is
+// clamped to 3 lines on the card with a "Show more" link when longer.
 type Member = {
   name:        string;
   credentials: string[];
@@ -18,62 +19,62 @@ const TEAM_MEMBERS: Member[] = [
     credentials: ["FCA", "CS", "CISA"],
     role:        "Chartered Accountant",
     badge:       "Ex-Big4",
-    summary:     "17+ years in Indirect Tax, Internal Financial Controls, Assurance and CFO Services, including a four-year stint at PwC. Represents clients in GST investigations, including search, seizure and summons proceedings, and advises Fortune 500 companies. A regular trainer on GST.",
+    summary:     "With over 17 years of experience, Bishnu Kumar Agarwal brings expertise in indirect taxation, internal financial controls, assurance, and CFO services. His experience includes four years at PwC and advising Fortune 500 companies. He represents clients in GST investigations, including search, seizure, and summons proceedings, and regularly conducts training on GST.",
   },
   {
     name:        "Pramod Kumar Goenka",
     credentials: ["FCA"],
     role:        "Chartered Accountant",
-    summary:     "43+ years in taxation and accountancy, assisting clients in direct and indirect tax matters up to the Supreme Court. Currently focused on GST advisory and a regular speaker on GST.",
+    summary:     "With over 43 years of experience, Pramod Kumar Goenka brings extensive expertise in taxation and accountancy, assisting clients with direct and indirect tax matters, including those before the Supreme Court. His current focus is GST advisory, and he regularly shares his insights as a speaker on GST.",
   },
   {
     name:        "Ashish Agarwal",
     credentials: ["FCA", "DISA"],
     role:        "Chartered Accountant",
-    summary:     "18+ years across accounting, audit, taxation and company law. Expert in income tax matters and scrutiny cases, and has provided CFO support to various companies.",
+    summary:     "With over 18 years of experience, Ashish Agarwal brings expertise in accounting, auditing, taxation, and corporate law compliance. He represents clients before the Income Tax Department in scrutiny assessments and search and seizure proceedings, and has served as a CFO advisor to several companies.",
   },
   {
     name:        "Arpit Malik",
     credentials: ["CA"],
     role:        "Partner",
-    summary:     "Advises early and growth-stage enterprises on financial structuring, investor readiness and compliance, supporting businesses from incorporation to multi-million-dollar funding closures.",
+    summary:     "With over 8 years of experience, Arpit Malik advises early and growth-stage enterprises on financial structuring, investor readiness, and compliance. He has supported businesses from incorporation through the successful closure of multi-million-dollar funding rounds.",
   },
   {
     name:        "Abdul Hameed",
     credentials: ["FCA", "CMA"],
     role:        "Chartered Accountant",
-    summary:     "Senior-level experience across industries in indirect taxes, internal audit and financial reporting, including audits of complex manufacturing and IT companies, plus CFO support.",
+    summary:     "With over 31 years of professional experience, Abdul Hameed brings extensive expertise in taxation, internal audit, and financial reporting across diverse industries. His experience includes audits of complex manufacturing and IT companies, along with CFO advisory and support services.",
   },
   {
     name:        "Gauri Kumari",
     credentials: ["FCA", "CISA"],
     role:        "Chartered Accountant",
-    summary:     "16+ years in audit support, internal financial control, SOX and statutory audit, including three years at PwC. Has served several Fortune 500 companies.",
+    summary:     "With over 16 years of experience, Gauri Kumari brings expertise in audit support, internal financial controls, SOX compliance, and statutory audit. Her experience includes three years at PwC and engagements with several Fortune 500 companies.",
   },
   {
     name:        "Ishita Kharbanda",
     credentials: ["ACA"],
     role:        "Chartered Accountant",
     badge:       "Ex-Big4",
-    summary:     "13 years in audit support, statutory and tax audits and internal controls over financial reporting, including audits of complex manufacturing and IT companies.",
+    summary:     "With 13 years of experience, Ishita Kharbanda brings expertise in audit support, statutory and tax audits, and internal controls over financial reporting. Her experience includes working with a Big Four firm and auditing complex manufacturing and IT companies.",
   },
   {
     name:        "Tousif Rahman",
     credentials: ["FCA"],
     role:        "Chartered Accountant",
-    summary:     "Commerce graduate and FCA with 11 years of post-qualification experience in audit and taxation.",
+    summary:     "With over 16 years of experience, Tousif Rahman brings expertise in audit and taxation. A Fellow Chartered Accountant and commerce graduate, he supports businesses with their audit, tax, and compliance requirements.",
   },
   {
     name:        "Sachi Agarwal",
     credentials: ["FCA"],
     role:        "Chartered Accountant",
-    summary:     "9 years of post-qualification experience in assurance, tax and regulatory services.",
+    summary:     "With 9 years of post-qualification experience, Sachi Agarwal brings expertise in assurance, taxation, and regulatory services. A Fellow Chartered Accountant, she supports businesses in meeting their reporting and compliance requirements.",
   },
   {
     name:        "Venkat Krishnamoorthy",
     credentials: ["ACA", "DICA"],
     role:        "Chartered Accountant",
-    summary:     "Holds a B.M.S. degree and the DICA (ICAI) qualification, with 2.5 years of post-qualification experience in audit and assurance.",
+    summary:     "With over 6 years of experience, Venkat Krishnamoorthy brings expertise in audit and assurance. A Chartered Accountant with a B.M.S. degree and the DICA qualification from ICAI, he supports businesses with their audit and financial reporting requirements.",
   },
 ];
 
@@ -95,7 +96,28 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-function TeamCard({ name, credentials, role, badge, summary, index, className = "" }: Member & { index: number; className?: string }) {
+type TeamCardProps = Member & {
+  index:     number;
+  className?: string;
+  expanded:  boolean;
+  onToggle:  () => void;
+};
+
+function TeamCard({ name, credentials, role, badge, summary, index, className = "", expanded, onToggle }: TeamCardProps) {
+  // Show the "Show more" link only when the clamped summary is actually cut off.
+  const summaryRef = useRef<HTMLParagraphElement>(null);
+  const [clamped, setClamped] = useState(false);
+
+  useLayoutEffect(() => {
+    const el = summaryRef.current;
+    if (!el || expanded) return;
+    const check = () => setClamped(el.scrollHeight > el.clientHeight + 1);
+    check();
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [expanded, summary]);
+
   return (
     <motion.div
       custom={index}
@@ -133,8 +155,23 @@ function TeamCard({ name, credentials, role, badge, summary, index, className = 
 
       <div className="my-6 h-px bg-gradient-to-r from-[#D4AF37]/40 via-slate-200 to-transparent" />
 
-      {/* Summary */}
-      <p className="text-sm text-slate-600 font-sans leading-relaxed">{summary}</p>
+      {/* Summary - clamped to 3 lines so every card is the same height */}
+      <p
+        ref={summaryRef}
+        className={`text-sm text-slate-600 font-sans leading-relaxed ${expanded ? "" : "line-clamp-3"}`}
+      >
+        {summary}
+      </p>
+      {(clamped || expanded) && (
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          className="self-start mt-3 text-[11px] font-mono font-bold tracking-widest uppercase text-[#a8871f] hover:text-slate-900 transition-colors duration-200 cursor-pointer"
+        >
+          {expanded ? "Show less" : "Show more"}
+        </button>
+      )}
 
       {/* Gold underline sweep */}
       <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-500" />
@@ -143,6 +180,20 @@ function TeamCard({ name, credentials, role, badge, summary, index, className = 
 }
 
 export default function Team() {
+  // Only one card is expanded at a time. `rowHeight` remembers the shared
+  // collapsed card height so the other cards keep it while one is expanded.
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const [rowHeight, setRowHeight] = useState(0);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const toggle = (i: number) => {
+    if (expanded === null) {
+      const first = gridRef.current?.firstElementChild as HTMLElement | null;
+      setRowHeight(first?.getBoundingClientRect().height ?? 0);
+    }
+    setExpanded(expanded === i ? null : i);
+  };
+
   return (
     <section id="team" className="relative bg-[#FAFAFA] pt-0 pb-24 sm:pb-32 border-b border-slate-100 overflow-hidden">
       {/* Subtle background accent */}
@@ -170,12 +221,26 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        {/* auto-rows-fr makes every row (and so every card) the same height while
+            all cards are collapsed. While one card is expanded, rows keep that
+            height as a minimum so only the expanded card's row grows. */}
+        <div
+          ref={gridRef}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch ${expanded === null ? "auto-rows-fr" : ""}`}
+          style={expanded !== null && rowHeight ? { gridAutoRows: `minmax(${rowHeight}px, auto)` } : undefined}
+        >
           {TEAM_MEMBERS.map((member, i) => {
             // On the 3-column layout, centre a lone card on the last row.
             const isLoneLast = i === TEAM_MEMBERS.length - 1 && TEAM_MEMBERS.length % 3 === 1;
             return (
-              <TeamCard key={i} {...member} index={i} className={isLoneLast ? "lg:col-start-2" : ""} />
+              <TeamCard
+                key={i}
+                {...member}
+                index={i}
+                className={isLoneLast ? "lg:col-start-2" : ""}
+                expanded={expanded === i}
+                onToggle={() => toggle(i)}
+              />
             );
           })}
         </div>
