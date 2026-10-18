@@ -130,7 +130,7 @@ export default function Navbar() {
 
             {/* Home */}
             <li>
-              <a href="/" onClick={(e) => { e.preventDefault(); goTo(null); }} className="relative text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group">
+              <a href="/" onClick={(e) => { e.preventDefault(); goTo(null); }} className="relative flex items-center text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group">
                 Home
                 <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
               </a>
@@ -141,7 +141,7 @@ export default function Navbar() {
               <a
                 href="/#about"
                 onClick={(e) => { e.preventDefault(); goTo("about"); }}
-                className="relative text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
+                className="relative flex items-center text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
               >
                 About Us
                 <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
@@ -211,7 +211,7 @@ export default function Navbar() {
                 <a
                   href={`/${id ? `#${id}` : ""}`}
                   onClick={(e) => { e.preventDefault(); goTo(id); }}
-                  className="relative text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
+                  className="relative flex items-center text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
                 >
                   {label}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
@@ -224,7 +224,7 @@ export default function Navbar() {
               <Link
                 to="/careers"
                 onClick={() => window.scrollTo({ top: 0 })}
-                className="relative text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
+                className="relative flex items-center text-[11px] leading-none font-sans font-semibold tracking-widest uppercase text-slate-900 hover:text-slate-700 transition-colors duration-300 group"
               >
                 Careers
                 <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
